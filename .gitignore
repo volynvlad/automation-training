@@ -1,0 +1,10 @@
+*.log
+/target
+/bin
+/triangle/.idea
+/triangle/build
+/triangle/build.gradle
+/triangle/grandle
+/triagnle/gradlew
+/triangle/gradlew.bat
+/triangle/settings.gradle
