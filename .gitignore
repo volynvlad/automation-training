@@ -11,3 +11,5 @@
 /triangle/settings.gradle
 /selenium/target
 /selenium/.idea
+/clean-code/.idea
+/clean-code/target
