@@ -9,3 +9,5 @@
 /triangle/gradlew
 /triangle/gradlew.bat
 /triangle/settings.gradle
+/selenium/target
+/selenium/.idea
