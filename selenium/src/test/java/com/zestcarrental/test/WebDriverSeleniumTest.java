@@ -1,5 +1,6 @@
 package com.zestcarrental.test;
 
+import com.zestcarrental.page.DateQuotePage;
 import com.zestcarrental.page.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,7 +36,7 @@ public class WebDriverSeleniumTest {
 
     @Test
     public void longRentalDuration() {
-        HomePage page = new HomePage(webDriver)
+        DateQuotePage page = new HomePage(webDriver)
                 .openPage()
                 .searchForLocation(correctLocation);
         String quoteDateUrl = page.getCurrentUrl();
