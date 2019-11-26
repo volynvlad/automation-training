@@ -7,26 +7,31 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class HomePage extends Page {
+import static com.zestcarrental.util.StringUtils.HOMEPAGE_URL;
 
-    @FindBy(xpath = "//*[@id=\"search_pickup_location_name\"]")
+public class HomePage extends AbstractPage {
+
+    private static final String SEARCH_PICKUP_ID = "search_pickup_location_name";
+    private static final String SEARCH_BUTTON_SUBMIT_CLASSNAME = "search_form__submit";
+    private static final String BERLIN_DROP_DOWN_CLASS_NAME = "field_suggestions__suggestion field_suggestions__suggestion--station";
+
+    @FindBy(id = SEARCH_PICKUP_ID)
     private WebElement searchPickup;
-    @FindBy(xpath = "//*[@id=\"book-now\"]/div/div[2]/form/button")
+    @FindBy(className = SEARCH_BUTTON_SUBMIT_CLASSNAME)
     private WebElement buttonGo;
 
-    @FindBy(xpath = "//*[@id=\"book-now\"]/div/div[2]/form/div[1]/div/button[1]")
+    @FindBy(className = BERLIN_DROP_DOWN_CLASS_NAME, ="Berlin")
     private WebElement berlinDropDownButton;
 
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(this.webDriver, this);
     }
 
     @Override
     public HomePage openPage() {
-        webDriver.get(HOMEPAGE_URL);
-        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        webDriver.navigate().to(HOMEPAGE_URL);
         return this;
     }
 

@@ -10,7 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class AirportTest {
     private static List<Plane> planes = Arrays.asList(
@@ -39,13 +41,7 @@ public class AirportTest {
         Airport airport = new Airport(planes);
         List<MilitaryPlane> transportMilitaryPlanes = airport.getTransportMilitaryPlanes();
 
-        boolean gatedTransportMilitaryPlanes = false;
-        for (MilitaryPlane militaryPlane : transportMilitaryPlanes) {
-            if ((militaryPlane.getType() == MilitaryType.TRANSPORT)) {
-                gatedTransportMilitaryPlanes = true;
-                break;
-            }
-        }
+        boolean gatedTransportMilitaryPlanes = transportMilitaryPlanes.stream().anyMatch(militaryPlane -> (militaryPlane.getType() == MilitaryType.TRANSPORT));
 
         Assert.assertTrue(gatedTransportMilitaryPlanes);
     }
@@ -63,13 +59,7 @@ public class AirportTest {
         airport.sortByMaxLoadCapacity();
         List<? extends Plane> planesSortedByMaxLoadCapacity = airport.getPlanes();
 
-        boolean isSorted = true;
-        for (int i = 0; i < planesSortedByMaxLoadCapacity.size() - 1; i++) {
-            if (planesSortedByMaxLoadCapacity.get(i).getMaxLoadCapacity() > planesSortedByMaxLoadCapacity.get(i + 1).getMaxLoadCapacity()) {
-                isSorted = false;
-                break;
-            }
-        }
+        boolean isSorted = IntStream.range(0, planesSortedByMaxLoadCapacity.size() - 1).noneMatch(i -> planesSortedByMaxLoadCapacity.get(i).getMaxLoadCapacity() > planesSortedByMaxLoadCapacity.get(i + 1).getMaxLoadCapacity());
 
         Assert.assertTrue(isSorted);
     }
@@ -79,13 +69,7 @@ public class AirportTest {
         Airport airport = new Airport(planes);
         List<MilitaryPlane> bomberMilitaryPlanes = airport.getBomberMilitaryPlanes();
 
-        boolean hasBomber = false;
-        for (MilitaryPlane militaryPlane : bomberMilitaryPlanes) {
-            if ((militaryPlane.getType() == MilitaryType.BOMBER)) {
-                hasBomber = true;
-                break;
-            }
-        }
+        boolean hasBomber = bomberMilitaryPlanes.stream().anyMatch(militaryPlane -> (militaryPlane.getType() == MilitaryType.BOMBER));
 
         Assert.assertTrue(hasBomber);
     }
@@ -95,13 +79,7 @@ public class AirportTest {
         Airport airport = new Airport(planes);
         List<ExperimentalPlane> experimentalPlanes = airport.getExperimentalPlanes();
 
-        boolean hasClassificationLevelHigherThanUnclassified = true;
-        for(ExperimentalPlane experimentalPlane : experimentalPlanes) {
-            if (experimentalPlane.getClassificationLevelType() == ClassificationLevelType.UNCLASSIFIED) {
-                hasClassificationLevelHigherThanUnclassified = false;
-                break;
-            }
-        }
+        boolean hasClassificationLevelHigherThanUnclassified = experimentalPlanes.stream().noneMatch(experimentalPlane -> experimentalPlane.getClassificationLevelType() == ClassificationLevelType.UNCLASSIFIED);
 
         Assert.assertTrue(hasClassificationLevelHigherThanUnclassified);
     }

@@ -7,6 +7,7 @@ import by.epam.aircompany.entity.plane.Plane;
 import by.epam.aircompany.entity.type.MilitaryType;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Airport {
     private List<? extends Plane> planes;
@@ -24,27 +25,13 @@ public class Airport {
     }
 
     public List<PassengerPlane> getPassengerPlanes() {
-        List<PassengerPlane> passengerPlanes = new ArrayList<>();
 
-        for (Plane plane : this.planes) {
-            if (plane instanceof PassengerPlane) {
-                passengerPlanes.add((PassengerPlane) plane);
-            }
-        }
-
-        return passengerPlanes;
+        return this.planes.stream().filter(plane -> plane instanceof PassengerPlane).map(plane -> (PassengerPlane) plane).collect(Collectors.toList());
     }
 
     public List<MilitaryPlane> getMilitaryPlanes() {
-        List<MilitaryPlane> militaryPlanes = new ArrayList<>();
 
-        for (Plane plane : this.planes) {
-            if (plane instanceof MilitaryPlane) {
-                militaryPlanes.add((MilitaryPlane) plane);
-            }
-        }
-
-        return militaryPlanes;
+        return this.planes.stream().filter(plane -> plane instanceof MilitaryPlane).map(plane -> (MilitaryPlane) plane).collect(Collectors.toList());
     }
 
     public PassengerPlane getPassengerPlaneWithMaxPassengersCapacity() {
@@ -60,37 +47,20 @@ public class Airport {
     }
 
     public List<MilitaryPlane> getTransportMilitaryPlanes() {
-        List<MilitaryPlane> transportMilitaryPlanes = new ArrayList<>();
 
-        for (MilitaryPlane militaryPlane : getMilitaryPlanes()) {
-            if (militaryPlane.getType() == MilitaryType.TRANSPORT) {
-                transportMilitaryPlanes.add(militaryPlane);
-            }
-        }
-
-        return transportMilitaryPlanes;
+        return getMilitaryPlanes().stream().filter(militaryPlane -> militaryPlane.getType() == MilitaryType.TRANSPORT).collect(Collectors.toList());
     }
 
     public List<MilitaryPlane> getBomberMilitaryPlanes() {
-        List<MilitaryPlane> bomberMilitaryPlanes = new ArrayList<>();
 
-        for (MilitaryPlane militaryPlane : getMilitaryPlanes()) {
-            if (militaryPlane.getType() == MilitaryType.BOMBER) {
-                bomberMilitaryPlanes.add(militaryPlane);
-            }
-        }
-
-        return bomberMilitaryPlanes;
+        return getMilitaryPlanes().stream().filter(militaryPlane -> militaryPlane.getType() == MilitaryType.BOMBER).collect(Collectors.toList());
     }
 
     public List<ExperimentalPlane> getExperimentalPlanes() {
-        List<ExperimentalPlane> experimentalPlanes = new ArrayList<>();
+        List<ExperimentalPlane> experimentalPlanes;
 
-        for (Plane plane : this.planes) {
-            if (plane instanceof ExperimentalPlane) {
-                experimentalPlanes.add((ExperimentalPlane) plane);
-            }
-        }
+        List<? extends Plane> list = this.planes;
+        experimentalPlanes = list.stream().filter(plane -> plane instanceof ExperimentalPlane).map(plane -> (ExperimentalPlane) plane).collect(Collectors.toList());
 
         return experimentalPlanes;
     }

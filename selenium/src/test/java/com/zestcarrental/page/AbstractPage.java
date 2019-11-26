@@ -2,14 +2,13 @@ package com.zestcarrental.page;
 
 import org.openqa.selenium.WebDriver;
 
-public abstract class Page {
+public abstract class AbstractPage {
     protected final int WAIT_TIMEOUT_SECONDS = 15;
-    protected static final String HOMEPAGE_URL = "https://www.zestcarrental.com/";
 
     protected WebDriver webDriver;
-    protected abstract Page openPage();
+    protected abstract AbstractPage openPage();
 
-    protected Page(WebDriver webDriver) {
+    protected AbstractPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 

@@ -7,7 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class DateQuotePage extends Page {
+import static com.zestcarrental.util.StringUtils.HOMEPAGE_URL;
+
+public class DateQuotePage extends AbstractPage {
 
     @FindBy(xpath = "//*[@id=\"dp1573717085067\"]/div/div/a[2]")
     private WebElement returnDateNextButton;
@@ -38,7 +40,7 @@ public class DateQuotePage extends Page {
 
     public DateQuotePage(WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(this.webDriver, this);
     }
 
     public DateQuotePage choosePickupDate() {
