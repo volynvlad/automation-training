@@ -18,6 +18,9 @@ public class BookingPage extends AbstractPage {
     protected BookingPage openPage() {
         webDriver.get(HOMEPAGE_URL);
         webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+        logger.info("Open booking page");
+
         return this;
     }
 

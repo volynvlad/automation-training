@@ -49,10 +49,37 @@ public class UserCreator {
     }
 
     public static User withEmptyUsername(){
-        return new User("", TestDataReader.getTestData(TESTDATA_USER_PASSWORD));
+        return new User(
+                "DEADINSIDE",
+                "OSHIHITEO",
+                TitleType.Mr,
+                "vlad",
+                "volynets",
+                28,
+                "37591074707",
+                "serious.blr@gmail.com",
+                "Germany",
+                "Berlin",
+                222222,
+                "823782378",
+                "84399743",
+                1);
     }
 
     public static User withEmptyPassword(){
-        return new User(TestDataReader.getTestData(TESTDATA_USER_NAME), "");
+        return new User(TestDataReader.getTestData(TESTDATA_USER_NAME),
+                "",
+                TitleType.Mr,
+                "",
+                "",
+                28,
+        "",
+                "",
+                "",
+                "",
+                222,
+                "",
+                "",
+                1);
     }
 }

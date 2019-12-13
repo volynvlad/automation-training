@@ -20,7 +20,7 @@ public class HomePage extends AbstractPage {
     @FindBy(className = SEARCH_BUTTON_SUBMIT_CLASSNAME)
     private WebElement buttonGo;
 
-    @FindBy(className = BERLIN_DROP_DOWN_CLASS_NAME, ="Berlin")
+    @FindBy(className = "Berlin")
     private WebElement berlinDropDownButton;
 
 
@@ -31,17 +31,23 @@ public class HomePage extends AbstractPage {
 
     @Override
     public HomePage openPage() {
-        webDriver.navigate().to(HOMEPAGE_URL);
+        logger.info("Open home page");
+
+        webDriver.get(HOMEPAGE_URL);
+
         return this;
     }
 
     public DateQuotePage searchForLocation(String location) {
+        logger.info("Type location name in search input");
+
         searchPickup.click();
         searchPickup.sendKeys(location);
         searchPickup.click();
         berlinDropDownButton.click();
         buttonGo.click();
         webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
         return new DateQuotePage(webDriver);
     }
 }

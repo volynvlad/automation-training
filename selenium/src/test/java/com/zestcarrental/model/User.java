@@ -21,7 +21,9 @@ public class User {
     private String nameOnCard;
     private int securityCode;
 
-    public User(String username, String password, TitleType titleType, String firstName, String lastName, int age, String mobileNumber, String email, String country, String city, int postCode, String cardNumber, String nameOnCard, int securityCode) {
+    public User(String username, String password, TitleType titleType, String firstName, String lastName,
+                int age, String mobileNumber, String email, String country, String city, int postCode,
+                String cardNumber, String nameOnCard, int securityCode) {
         this.username = username;
         this.password = password;
         this.titleType = titleType;
