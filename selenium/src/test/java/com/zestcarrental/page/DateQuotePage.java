@@ -29,13 +29,25 @@ public class DateQuotePage extends AbstractPage {
     private static final String CLASS_NAME_MONTH = "ui-datepicker-month";
     private static final String CLASS_NAME_YEAR = "ui-datepicker-year";
 
+    private static final String ABSOLUTE_PATH_PICKUP_MINUTE = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[3]/div[2]/span[1]/span[1]/span/span[1]";
+    private static final String ABSOLUTE_PATH_PICKUP_HOUR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[3]/div[2]/span[3]/span[1]/span/span[1]";
+    private static final String ABSOLUTE_PATH_RETURN_MINUTE = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[3]/div[2]/span[1]/span[1]/span/span[1]";
+    private static final String ABSOLUTE_PATH_RETURN_HOUR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[3]/div[2]/span[3]/span[1]/span/span[1]";
+
+    private static final String ID_DROPDOWN_PICKUP_HOUR = "select2-pickup_time_hours-pa-results";
+    private static final String ID_DROPDOWN_PICKUP_MINUTE = "select2-pickup_time_minutes-th-results";
+    private static final String ID_DROPDOWN_RETURN_HOUR = "select2-pickup_time_hours-pa-results";
+    private static final String ID_DROPDOWN_RETURN_MINUTE = "select2-pickup_time_minutes-th-results";
+
+    private static final String ABSOLUTE_PATH_INPUT_DRIVER_AGE = "/html/body/div[1]/div/section[1]/form/fieldset[2]/p/input[2]";
     private static final String ABSOLUTE_PATH_FIND_CAR_BUTTON = "/html/body/div[1]/div/section[1]/form/footer/button";
+
 
     @FindBy(className = CLASS_NAME_CALENDAR)
     private WebElement datePickUpCalendar;
 
     @FindBy(xpath = ABSOLUTE_PATH_PICKUP_CALENDAR)
-    private WebElement pickUpCalendar;
+    private WebElement pickupCalendar;
     @FindBy(xpath = ABSOLUTE_PATH_RETURN_CALENDAR)
     private WebElement returnCalendar;
 
@@ -54,12 +66,64 @@ public class DateQuotePage extends AbstractPage {
     @FindBy(className = CLASS_NAME_YEAR)
     private WebElement datePickerYear;
 
+    @FindBy(xpath = ABSOLUTE_PATH_PICKUP_HOUR)
+    private WebElement pickupHour;
+    @FindBy(xpath = ABSOLUTE_PATH_PICKUP_MINUTE)
+    private WebElement pickupMinute;
+    @FindBy(xpath = ABSOLUTE_PATH_RETURN_HOUR)
+    private WebElement returnHour;
+    @FindBy(xpath = ABSOLUTE_PATH_RETURN_MINUTE)
+    private WebElement returnMinute;
+
+    List<WebElement> dropdownPickupHour = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_HOUR));
+    List<WebElement> dropdownPickupMinute = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_MINUTE));
+    List<WebElement> dropdownReturnHour = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_HOUR));
+    List<WebElement> dropdownReturnMinute = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_MINUTE));
+
+    @FindBy(xpath = ABSOLUTE_PATH_INPUT_DRIVER_AGE)
+    private WebElement inputDriverAge;
     @FindBy(xpath = ABSOLUTE_PATH_FIND_CAR_BUTTON)
     private WebElement findCarButton;
+
 
     public DateQuotePage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(this.webDriver, this);
+    }
+
+    @Override
+    public DateQuotePage openPage() {
+        webDriver.get(HOMEPAGE_URL);
+        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+        logger.info("Open date quote page");
+
+        return this;
+    }
+
+    public WebElement getPickupCalendar() {
+        logger.info("Get pickUp Calendar");
+        return pickupCalendar;
+    }
+
+    public WebElement getReturnCalendar() {
+        logger.info("Get return Calendar");
+        return returnCalendar;
+    }
+
+    public String getDatePickerDay() {
+        logger.info("Get day from date picker");
+        return currentDatePickerDay.getAttribute("value");
+    }
+
+    public String getDatePickerMonth() {
+        logger.info("Get month from date picker");
+        return datePickerMonth.getAttribute("value");
+    }
+
+    public String getDatePickerYear() {
+        logger.info("Get year from date picker");
+        return datePickerYear.getAttribute("value");
     }
 
     public DateQuotePage choosePickupDate(int day, String month, int year) {
@@ -71,33 +135,27 @@ public class DateQuotePage extends AbstractPage {
 
         while (true) {
             if (year > chosenYear) {
-                this.getPickUpCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
+                this.getPickupCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
             } else if (year < chosenYear) {
-                this.getPickUpCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                this.getPickupCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
             } else {
                 if (findIndex(MONTHS, month) > findIndex(MONTHS, chosenMonth)) {
-                    this.getPickUpCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
+                    this.getPickupCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
                 } else if (findIndex(MONTHS, month) < findIndex(MONTHS, chosenMonth)) {
-                    this.getPickUpCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                    this.getPickupCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
                 } else {
                     break;
                 }
             }
         }
 
-        for (WebElement element : getPickUpCalendar().findElements(By.xpath(CLASS_NAME_DAY))) {
+        for (WebElement element : getPickupCalendar().findElements(By.xpath(CLASS_NAME_DAY))) {
             if (element.getText().equals(String.valueOf(day))) {
                 element.click();
             }
         }
 
         return this;
-    }
-
-    public DateQuotePage choosePickUpTime(int hour, int minute) {
-        logger.info("Choose pickup time");
-
-
     }
 
     public DateQuotePage chooseReturnDate(int day, String month, int year) {
@@ -131,43 +189,65 @@ public class DateQuotePage extends AbstractPage {
 
         return this;
     }
-    public WebElement getPickUpCalendar() {
-        logger.info("Get pickUp Calendar");
-        return pickUpCalendar;
+
+    public DateQuotePage choosePickupTime(int hour, int minute) {
+        logger.info("Choose pickup time");
+
+        pickupHour.click();
+
+        for (WebElement element : dropdownPickupHour) {
+            if (element.getText().equals(String.valueOf(hour))) {
+                element.click();
+            }
+        }
+
+        pickupMinute.click();
+
+        for (WebElement element : dropdownPickupMinute) {
+            if (element.getText().equals(String.valueOf(minute))) {
+                element.click();
+            }
+        }
+
+        return this;
     }
 
-    public WebElement getReturnCalendar() {
-        logger.info("Get return Calendar");
-        return returnCalendar;
+    public DateQuotePage chooseReturnTime(int hour, int minute) {
+        logger.info("Choose return time");
+
+        returnHour.click();
+
+        for (WebElement element : dropdownReturnHour) {
+            if (element.getText().equals(String.valueOf(hour))) {
+                element.click();
+            }
+        }
+
+        returnMinute.click();
+
+        for (WebElement element : dropdownReturnMinute) {
+            if (element.getText().equals(String.valueOf(minute))) {
+                element.click();
+            }
+        }
+
+        return this;
     }
 
-    public String getDatePickerDay() {
-        logger.info("Get day from date picker");
-        return currentDatePickerDay.getAttribute("value");
+    public DateQuotePage inputDriverAge(int age) {
+        logger.info("Input driver age");
+
+        inputDriverAge.click();
+        inputDriverAge.sendKeys(String.valueOf(age));
+
+        return this;
     }
 
-    public String getDatePickerMonth() {
-        logger.info("Get month from date picker");
-        return datePickerMonth.getAttribute("value");
-    }
+    public ResultQuotePage findCar() {
+        logger.info("Find car");
 
-    public String getDatePickerYear() {
-        logger.info("Get year from date picker");
-        return datePickerYear.getAttribute("value");
-    }
-
-    public DateQuotePage findCar() {
         findCarButton.click();
-        return this;
-    }
 
-    @Override
-    public DateQuotePage openPage() {
-        webDriver.get(HOMEPAGE_URL);
-        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-
-        logger.info("Open date quote page");
-
-        return this;
+        return new ResultQuotePage(webDriver);
     }
 }
