@@ -1,6 +1,5 @@
 package com.zestcarrental.page;
 
-import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2DTM2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.zestcarrental.util.StringUtils.MONTHS;
-import static com.zestcarrental.util.StringUtils.HOMEPAGE_URL;
 import static com.zestcarrental.util.ArrayUtils.findIndex;
 
 public class DateQuotePage extends AbstractPage {
@@ -93,10 +91,9 @@ public class DateQuotePage extends AbstractPage {
 
     @Override
     public DateQuotePage openPage() {
-        webDriver.get(HOMEPAGE_URL);
-        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-
         logger.info("Open date quote page");
+
+        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
 
         return this;
     }
