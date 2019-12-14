@@ -149,11 +149,9 @@ public class DateQuotePage extends AbstractPage {
             }
         }
 
-        for (WebElement element : getPickupCalendar().findElements(By.xpath(CLASS_NAME_DAY))) {
-            if (element.getText().equals(String.valueOf(day))) {
-                element.click();
-            }
-        }
+        getPickupCalendar().findElements(By.xpath(CLASS_NAME_DAY)).stream()
+                .filter(e -> e.getText().equals(String.valueOf(day)))
+                .forEach(WebElement::click);
 
         return this;
     }
@@ -181,11 +179,9 @@ public class DateQuotePage extends AbstractPage {
             }
         }
 
-        for (WebElement element : getReturnCalendar().findElements(By.xpath(CLASS_NAME_DAY))) {
-            if (element.getText().equals(String.valueOf(day))) {
-                element.click();
-            }
-        }
+        getReturnCalendar().findElements(By.xpath(CLASS_NAME_DAY)).stream()
+                .filter(e -> e.getText().equals(String.valueOf(day)))
+                .forEach(WebElement::click);
 
         return this;
     }
@@ -195,19 +191,11 @@ public class DateQuotePage extends AbstractPage {
 
         pickupHour.click();
 
-        for (WebElement element : dropdownPickupHour) {
-            if (element.getText().equals(String.valueOf(hour))) {
-                element.click();
-            }
-        }
+        dropdownPickupHour.stream().filter(e -> e.getText().equals(String.valueOf(hour))).forEach(WebElement::click);
 
         pickupMinute.click();
 
-        for (WebElement element : dropdownPickupMinute) {
-            if (element.getText().equals(String.valueOf(minute))) {
-                element.click();
-            }
-        }
+        dropdownPickupMinute.stream().filter(e -> e.getText().equals(String.valueOf(minute))).forEach(WebElement::click);
 
         return this;
     }
@@ -217,19 +205,11 @@ public class DateQuotePage extends AbstractPage {
 
         returnHour.click();
 
-        for (WebElement element : dropdownReturnHour) {
-            if (element.getText().equals(String.valueOf(hour))) {
-                element.click();
-            }
-        }
+        dropdownReturnHour.stream().filter(e -> e.getText().equals(String.valueOf(hour))).forEach(WebElement::click);
 
         returnMinute.click();
 
-        for (WebElement element : dropdownReturnMinute) {
-            if (element.getText().equals(String.valueOf(minute))) {
-                element.click();
-            }
-        }
+        dropdownReturnMinute.stream().filter(e -> e.getText().equals(String.valueOf(minute))).forEach(WebElement::click);
 
         return this;
     }
