@@ -17,7 +17,7 @@ test-case 2
  - Пользователь вводит в форму местоположение, где он заберет автомобиль :
  - Пользователь вводит Berlin
 Результат:
-  - В выподающем меню появляются местоположения, которые содержат слово "Berlin"
+   В выподающем меню появляются местоположения, которые содержат слово "Berlin"
 Шаги:
  - Пользователь выбирает одно из них
  - Ниже формы ввода ставит галочку напротив Return to a different location?
@@ -34,7 +34,7 @@ test-case 3
  - Пользователь вводит время в форму Return date - 3 February 2020, Return time - 0:00
  - Пользователь нажимает "Find a car"
 Результат:
- - Над формами Pickup, Return появляется сообщение(feedback) "The end date must be after the start date."
+   Над формами Pickup, Return появляется сообщение(feedback) "The end date must be after the start date."
 
 test-case 4 (bag)
 Пользователь корректно заполнил форму и перешел на следующую страницу
@@ -45,7 +45,7 @@ test-case 4 (bag)
  - Пользователь вводит время в форму Return date - 27 January 2020, Return time - 21:00
  - Пользователь нажимает "Find a car"
 Результат: 
- - Над формами Pickup, Return появляется сообщение(feedback) "The end date must be after the start date."
+   Над формами Pickup, Return появляется сообщение(feedback) "The end date must be after the start date."
 
 test-case 5 
 Пользователь корректно заполнил форму и перешел на следующую страницу
@@ -55,7 +55,7 @@ test-case 5
  - Пользователь вводит время в форму Pickup time - 10:00, когда сейчас 15:30
  - Пользователь нажимает "Find a car"
 Результат: 
-  - Над формами Pickup, Return появляется сообщение(feedback) "Sorry, it is too late to make this booking online. Currently we require 17 hours notice to make a booking."	
+   Над формами Pickup, Return появляется сообщение(feedback) "Sorry, it is too late to make this booking online. Currently we require 17 hours notice to make a booking."	
 	
 test-case 6
 Пользователь корректно заполнил форму и перешел на следующую страницу
@@ -66,7 +66,7 @@ test-case 6
  - Пользователь вводит в Return date 24 January 2020, Return time 00:00
  - Пользователь нажимает "Find a car"
 Результат: 
- - Над формами Pickup, Return появляется сообщение(feedback) "There are no vehicles available for a rental duration longer than 60 days."
+  Над формами Pickup, Return появляется сообщение(feedback) "There are no vehicles available for a rental duration longer than 60 days."
 
 test-case 7
 Пользователь корректно заполнил форму и перешел на следующую страницу
@@ -77,7 +77,7 @@ test-case 7
  - Пользователь вводит в форму Please enter the main driver's age - 24
  - Пользователь нажимает "Find a car"
 Результат:
- - Над формами Pickup, Return появляется сообщение(feedback) "There are no vehicles available for a driver of age 24."
+   Над формами Pickup, Return появляется сообщение(feedback) "There are no vehicles available for a driver of age 24."
 
 test-case 8
 Пользователь корректно заполнил форму Pickup, Return, Age
@@ -91,18 +91,122 @@ test-case 9
 Шаги:
  - Пользователь нажимает "Book this car"
 Результат:
- - Пользователь попадает на 4 стадии, где ему нужно ввести требуемую информацию.
+   Пользователь попадает на 4 стадии, где ему нужно ввести требуемую информацию.
 
 test-case 10
-Пользователь корректно ввел всю информацию. Перед ним 4ый этап Your details&payment
+Пользователь находится на главной странице
 Шаги:
-- При некорректном вводе данных выдаст ошибку
-	- Card Number - 0000000000000000
-	- Expiry Date - mm:yyyy - 10:2000
-	- Name on Card - asdf
-	- Security Code - 456
- - Пользователь нажимает "Continue"
-Результат: 
- - Please enter a valid card number.
- - Please enter a valid expiry date.
+ - Пользователь вводит в форму местоположение, где он заберет автомобиль.
+ - Пользователь вводит Budapest
+Результат:
+   В выподающем меню появляются местоположения, которые содержат слово "budapest"
+Шаги:
+ - Пользователь выбирает Budapest
+Результат:
+   Выподающее меню пропадет
+Шаги:
+ - Пользователь нажимает на кнопку Go
+Результат:
+   Пользователь попадает на страницу для ввода даты и времени, где он заберет и вернет автомобиль
+Шаги:
+ - Пользователь нажимает на кнопку > в pickup date, пока на календаре не появится нужный месяц, после этого выбирает нужную дату(17 February 2020)
+
+Ниже календаря есть Pickup time с двумя selector-ами с часами(HH) и с минутами(ММ).
+Нажимая на них на сайте появляется список из времени, которое мы можем выбрать время 
+ - Пользоваетель выбирает нужное время 00 15.
+
+Шаги:
+ - Пользователь нажимает на кнопку > в return date, пока на календаре не появится нужный месяц, после этого выбирает нужную дату(24 February 2020)
+
+Ниже календаря есть Return time с двумя selector-ами с часами(HH) и с минутами(ММ).
+Нажимая на них на сайте появляется список из времени, которое мы можем выбрать время 
+
+ - Пользоваетель выбирает нужное время 00 15.
+
+Ниже находится форма Please enter the main driver's age.
+
+Шаги:
+ - Пользователь вводит возраст - 28.
+Ниже находится кнопка "Find a car"
+
+Шаги: 
+ - Пользователь нажимает на кнопку "Find a car"
+Результат:
+ - Пользователь переходит на страницу quote/results/
+
+Где пользователь может выбрать доступные автомобили на введенную им дату. Напротив каждой машины есть кнопка "Book this car"
+ - Пользователь нажимает на первую кнопку "Book this car".
+Результат:
+ - Пользователь попадает на страницу booking/extras/
+
+Пользователь видит машину которую он выбрал, а так же дополнительные возможности, которые он может выбрать. Ниже находится кнопка "Next step".
+Шаги:
+ - Пользователь нажимает на кнопку "Next step"
+Результат:
+ - Пользователь переходит на страницу /booking/insurance/
+Пользователь видит опцию по выбору страховки. Ниже находится кнопка "Next step.
+Шаги:
+ - Пользователь нажимает на кнопку "Next step"
+Результат:
+ - Пользователь переходит на страницу booking/travel-details/
+Пользователь видит форму. Ниже находятся два label:
+ * Please confirm that the main driver has a credit card with available funds of at least EUR 1,000.00 on collection of the vehicle.
+ * Please confirm that you accept the terms and conditions.
+Ниже находится кнопка "Next step"
+Шаги:
+ - Пользователь заполняет форму: 
+  First name - John 
+  Last name - John
+  Age 28
+  Mobile number - 375292222222
+ - Пользователь нажимает на оба label 
+ - Пользователь нажимает на кнопку "Next step"
+Результат:
+ - Пользователь переходит на страницу booking/sign-in/
+Пользователь видит форму в которой находится label
+ * "I'm new to this site."
+ * "I have booked with you before."
+и input для почты. Ниже находится кнопка "Continue"
+Шаги:
+ - Пользователь выбирает "I'm new to this site"
+ - Пользователь вводит почту - "hjfbdjhsdf@gmail.com"
+ - Пользователь нажимает на кнопку "Continue"
+Результат:
+ - Пользователь переходит на страницу booking/customer-details/
+Пользователь видит форму. Время и место, где пользователь заберет и вернет автомобиль совпадают с тем, что было введено.Ниже формы label - Zest Newsletter
+ - Would you like to receive our regular travel emails which contain special offers, travel tips and news? 
+ * Yes
+ * No
+Ниже находится кнопка "Continue to payment"
+ - Пользователь заполняет форму 
+ * Title - Mr
+ * First name - John
+ * Last name - John
+ * Address line1 - adsfasf
+ * Address line2 - asdfsdf
+ * City - Budapest
+ * Country - Hungary
+ * Postcode - 222
+ * Country - Hungary
+ * Telephone number - 333888
+ * Mobile number - 375292222222
+ * Email - hjfbdjhsdf@gmail.com
+ * Retype email - hjfbdjhsdf@gmail.com
+ - В Zest Newsletter пользователь выбирает No
+ - Пользователь нажимает на кнопку "Continue to payment"
+Результат:
+ - Пользователь переходит на страницу booking/payment/
+Пользователь видит форму заполнения карты. Ниже находится кнопка "Continue"
+Ниже находится итоговая информация об автомобиле который пользователь собирается забронировать.
+Шаги:
+ - Пользователь заполняет форму 
+ * Card Number - 2222222222222222
+ * Expire Date mm yyyy - 10 2022
+ * Name On Card - asdfsdf
+ * Security Code - 222
+ - Пользователь нажимает на кнопку "Continue"
+Результат:
+ - Над формой появляется сообщение "Please enter a valid card number."
+ 
+
 
