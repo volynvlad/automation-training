@@ -15,7 +15,7 @@ public class DriverSingleton {
 
     public static WebDriver getDriver() {
         if (null == driver) {
-            switch (System.getProperty("browser")) {
+            switch ("asdf") {
                 case "firefox": {
                     FirefoxOptions options = new FirefoxOptions();
 

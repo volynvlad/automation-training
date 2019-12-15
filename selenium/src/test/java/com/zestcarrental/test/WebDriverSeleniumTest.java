@@ -9,6 +9,13 @@ import static com.zestcarrental.util.StringUtils.*;
 
 public class WebDriverSeleniumTest extends CommonConditions {
 
+    private static final int PICKUP_DAY = 17;
+    private static final int RETURN_DAY = 28;
+    private static final String PICKUP_MONTH = MONTHS[2];
+    private static final String RETURN_MONTH = MONTHS[2];
+    private static final int PICKUP_YEAR = 2020;
+    private static final int RETURN_YEAR = 2020;
+
     @Test
     public void incorrectSearchForLocation() {
         String url = new HomePage(driver)
@@ -24,7 +31,12 @@ public class WebDriverSeleniumTest extends CommonConditions {
                 .openPage()
                 .searchForLocation(correctLocation);
         String quoteDateUrl = page.getCurrentUrl();
-        String afterFindCarUrl = page.choosePickupDate().chooseReturnDate().findCar().getCurrentUrl();
+        String afterFindCarUrl = page.
+                choosePickupDate(PICKUP_DAY, PICKUP_MONTH, PICKUP_YEAR).
+                chooseReturnDate(RETURN_DAY, RETURN_MONTH, RETURN_YEAR).
+                choosePickupTime(0, 0).
+                chooseReturnTime(0, 0).
+                findCar().getCurrentUrl();
 
         Assert.assertEquals(quoteDateUrl, afterFindCarUrl);
     }

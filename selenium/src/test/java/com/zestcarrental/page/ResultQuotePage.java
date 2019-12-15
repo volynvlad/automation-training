@@ -29,11 +29,11 @@ public class ResultQuotePage extends AbstractPage {
         return this;
     }
 
-    public BookingPage bookCar(int num) {
+    public BookingPageExtras bookCar(int num) {
         logger.info("Book car");
 
         elements.get(num - 1).click();
 
-        return new BookingPage(webDriver);
+        return new BookingPageExtras(webDriver);
     }
 }

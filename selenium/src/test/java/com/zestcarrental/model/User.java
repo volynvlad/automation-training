@@ -20,10 +20,16 @@ public class User {
     private String cardNumber;
     private String nameOnCard;
     private int securityCode;
+    private String addressLineFirst;
+    private String addressLineSecond;
+    private String telephoneNumber;
+    private String expireMonthDate;
+    private String expireYearDate;
 
     public User(String username, String password, TitleType titleType, String firstName, String lastName,
                 int age, String mobileNumber, String email, String country, String city, int postCode,
-                String cardNumber, String nameOnCard, int securityCode) {
+                String cardNumber, String nameOnCard, int securityCode, String addressLineFirst,
+                String addressLineSecond, String telephoneNumber, String expireMonthDate, String expireYearDate) {
         this.username = username;
         this.password = password;
         this.titleType = titleType;
@@ -38,6 +44,11 @@ public class User {
         this.cardNumber = cardNumber;
         this.nameOnCard = nameOnCard;
         this.securityCode = securityCode;
+        this.addressLineFirst = addressLineFirst;
+        this.addressLineSecond = addressLineSecond;
+        this.telephoneNumber = telephoneNumber;
+        this.expireMonthDate = expireMonthDate;
+        this.expireYearDate = expireYearDate;
     }
 
     public String getUsername() {
@@ -152,6 +163,46 @@ public class User {
         this.securityCode = securityCode;
     }
 
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    public String getAddressLineFirst() {
+        return addressLineFirst;
+    }
+
+    public void setAddressLineFirst(String addressLineFirst) {
+        this.addressLineFirst = addressLineFirst;
+    }
+
+    public String getAddressLineSecond() {
+        return addressLineSecond;
+    }
+
+    public void setAddressLineSecond(String addressLineSecond) {
+        this.addressLineSecond = addressLineSecond;
+    }
+
+    public String getExpireMonthDate() {
+        return expireMonthDate;
+    }
+
+    public void setExpireMonthDate(String expireMonthDate) {
+        this.expireMonthDate = expireMonthDate;
+    }
+
+    public String getExpireYearDate() {
+        return expireYearDate;
+    }
+
+    public void setExpireYearDate(String expireYearDate) {
+        this.expireYearDate = expireYearDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -170,12 +221,17 @@ public class User {
                 Objects.equals(country, user.country) &&
                 Objects.equals(city, user.city) &&
                 Objects.equals(cardNumber, user.cardNumber) &&
-                Objects.equals(nameOnCard, user.nameOnCard);
+                Objects.equals(nameOnCard, user.nameOnCard) &&
+                Objects.equals(addressLineFirst, user.addressLineFirst) &&
+                Objects.equals(addressLineSecond, user.addressLineSecond) &&
+                Objects.equals(telephoneNumber, user.telephoneNumber) &&
+                Objects.equals(expireMonthDate, user.expireMonthDate) &&
+                Objects.equals(expireYearDate, user.expireYearDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, titleType, firstName, lastName, age, mobileNumber, email, country, city, postCode, cardNumber, nameOnCard, securityCode);
+        return Objects.hash(username, password, titleType, firstName, lastName, age, mobileNumber, email, country, city, postCode, cardNumber, nameOnCard, securityCode, addressLineFirst, addressLineSecond, telephoneNumber, expireMonthDate, expireYearDate);
     }
 
     @Override
@@ -195,8 +251,11 @@ public class User {
                 ", cardNumber='" + cardNumber + '\'' +
                 ", nameOnCard='" + nameOnCard + '\'' +
                 ", securityCode=" + securityCode +
+                ", addressLineFirst='" + addressLineFirst + '\'' +
+                ", addressLineSecond='" + addressLineSecond + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", expireMonthDate='" + expireMonthDate + '\'' +
+                ", expireYearDate='" + expireYearDate + '\'' +
                 '}';
     }
-
-
 }

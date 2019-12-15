@@ -25,6 +25,9 @@ public class UserCreator {
     public static final int TESTDATA_NUMBER_CARD = 220000;
     public static final String TESTDATA_CARDNAME = "2222222222222222";
     public static final int TESTDATA_SECURITYCARD = 222;
+    public static final String TESTDATA_ADDERSS_LINE_FIRST = "asdfasdf";
+    public static final String TESTDATA_ADDERSS_LINE_SECOND = "asdfasdf";
+    public static final String TESTDATA_TELEPHONE_NUMBER = "22222222";
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -45,7 +48,11 @@ public class UserCreator {
                 TESTDATA_POSTCODE,
                 TestDataReader.getTestData(TESTDATA_CARDNUMBER),
                 TestDataReader.getTestData(TESTDATA_CARDNAME),
-                TESTDATA_SECURITYCARD);
+                TESTDATA_SECURITYCARD,
+                TESTDATA_ADDERSS_LINE_FIRST,
+                TESTDATA_ADDERSS_LINE_SECOND,
+                TESTDATA_TELEPHONE_NUMBER
+                );
     }
 
     public static User withEmptyUsername(){
@@ -63,10 +70,13 @@ public class UserCreator {
                 222222,
                 "823782378",
                 "84399743",
-                1);
+                1,
+                "asddfasdf",
+                "asdfaad",
+                "222222");
     }
 
-    public static User withEmptyPassword(){
+    public static User withEmptyPassword() {
         return new User(TestDataReader.getTestData(TESTDATA_USER_NAME),
                 "",
                 TitleType.Mr,
@@ -80,6 +90,9 @@ public class UserCreator {
                 222,
                 "",
                 "",
-                1);
+                1,
+                "",
+                "",
+                "");
     }
 }

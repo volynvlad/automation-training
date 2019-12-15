@@ -46,40 +46,50 @@ public class DateQuotePage extends AbstractPage {
 
     @FindBy(xpath = ABSOLUTE_PATH_PICKUP_CALENDAR)
     private WebElement pickupCalendar;
+
     @FindBy(xpath = ABSOLUTE_PATH_RETURN_CALENDAR)
     private WebElement returnCalendar;
 
-
     @FindBy(className = CLASS_NAME_PREV_BUTTON)
     private WebElement prevButton;
+
     @FindBy(className = CLASS_NAME_NEXT_BUTTON)
     private WebElement nextButton;
 
-
     @FindBy(className = CLASS_NAME_CURRENT_DAY)
     private WebElement currentDatePickerDay;
-    List<WebElement> datesPickerDay = webDriver.findElements(By.xpath(CLASS_NAME_DAY));
+
+    private List<WebElement> datesPickerDay = webDriver.findElements(By.xpath(CLASS_NAME_DAY));
+
     @FindBy(className = CLASS_NAME_MONTH)
     private WebElement datePickerMonth;
+
     @FindBy(className = CLASS_NAME_YEAR)
     private WebElement datePickerYear;
 
     @FindBy(xpath = ABSOLUTE_PATH_PICKUP_HOUR)
     private WebElement pickupHour;
+
     @FindBy(xpath = ABSOLUTE_PATH_PICKUP_MINUTE)
     private WebElement pickupMinute;
+
     @FindBy(xpath = ABSOLUTE_PATH_RETURN_HOUR)
     private WebElement returnHour;
+
     @FindBy(xpath = ABSOLUTE_PATH_RETURN_MINUTE)
     private WebElement returnMinute;
 
-    List<WebElement> dropdownPickupHour = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_HOUR));
-    List<WebElement> dropdownPickupMinute = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_MINUTE));
-    List<WebElement> dropdownReturnHour = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_HOUR));
-    List<WebElement> dropdownReturnMinute = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_MINUTE));
+    private List<WebElement> dropdownPickupHour = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_HOUR));
+
+    private List<WebElement> dropdownPickupMinute = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_MINUTE));
+
+    private List<WebElement> dropdownReturnHour = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_HOUR));
+
+    private List<WebElement> dropdownReturnMinute = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_MINUTE));
 
     @FindBy(xpath = ABSOLUTE_PATH_INPUT_DRIVER_AGE)
     private WebElement inputDriverAge;
+
     @FindBy(xpath = ABSOLUTE_PATH_FIND_CAR_BUTTON)
     private WebElement findCarButton;
 
@@ -98,28 +108,15 @@ public class DateQuotePage extends AbstractPage {
         return this;
     }
 
-    public WebElement getPickupCalendar() {
-        logger.info("Get pickUp Calendar");
-        return pickupCalendar;
-    }
-
-    public WebElement getReturnCalendar() {
-        logger.info("Get return Calendar");
-        return returnCalendar;
-    }
-
     public String getDatePickerDay() {
-        logger.info("Get day from date picker");
         return currentDatePickerDay.getAttribute("value");
     }
 
     public String getDatePickerMonth() {
-        logger.info("Get month from date picker");
         return datePickerMonth.getAttribute("value");
     }
 
     public String getDatePickerYear() {
-        logger.info("Get year from date picker");
         return datePickerYear.getAttribute("value");
     }
 
@@ -132,21 +129,21 @@ public class DateQuotePage extends AbstractPage {
 
         while (true) {
             if (year > chosenYear) {
-                this.getPickupCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
+                pickupCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
             } else if (year < chosenYear) {
-                this.getPickupCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                pickupCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
             } else {
                 if (findIndex(MONTHS, month) > findIndex(MONTHS, chosenMonth)) {
-                    this.getPickupCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
+                    pickupCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
                 } else if (findIndex(MONTHS, month) < findIndex(MONTHS, chosenMonth)) {
-                    this.getPickupCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                    pickupCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
                 } else {
                     break;
                 }
             }
         }
 
-        getPickupCalendar().findElements(By.xpath(CLASS_NAME_DAY)).stream()
+        pickupCalendar.findElements(By.xpath(CLASS_NAME_DAY)).stream()
                 .filter(e -> e.getText().equals(String.valueOf(day)))
                 .forEach(WebElement::click);
 
@@ -162,21 +159,21 @@ public class DateQuotePage extends AbstractPage {
 
         while (true) {
             if (year > chosenYear) {
-                this.getReturnCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
+                returnCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
             } else if (year < chosenYear) {
-                this.getReturnCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                returnCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
             } else {
                 if (findIndex(MONTHS, month) > findIndex(MONTHS, chosenMonth)) {
-                    this.getReturnCalendar().findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
+                    returnCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
                 } else if (findIndex(MONTHS, month) < findIndex(MONTHS, chosenMonth)) {
-                    this.getReturnCalendar().findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                    returnCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
                 } else {
                     break;
                 }
             }
         }
 
-        getReturnCalendar().findElements(By.xpath(CLASS_NAME_DAY)).stream()
+        returnCalendar.findElements(By.xpath(CLASS_NAME_DAY)).stream()
                 .filter(e -> e.getText().equals(String.valueOf(day)))
                 .forEach(WebElement::click);
 
