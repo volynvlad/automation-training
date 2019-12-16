@@ -22,7 +22,7 @@ public class CarDestinationCriteria {
     private String hourReturn;
     private String minuteReturn;
 
-    private int numberOfDrivers;
+    private String numberOfDrivers;
 
     public String getLocationPickup() {
         return locationPickup;
@@ -120,15 +120,15 @@ public class CarDestinationCriteria {
         this.minuteReturn = minuteReturn;
     }
 
-    public int getNumberOfDrivers() {
+    public String getNumberOfDrivers() {
         return numberOfDrivers;
     }
 
-    public void setNumberOfDrivers(int numberOfDrivers) {
+    public void setNumberOfDrivers(String numberOfDrivers) {
         this.numberOfDrivers = numberOfDrivers;
     }
 
-    public CarDestinationCriteria(String locationPickup, String dayPickup, String monthPickup, String yearPickup, String hourPickup, String minutePickup, String locationReturn, String dayReturn, String monthReturn, String yearReturn, String hourReturn, String minuteReturn, int numberOfDrivers) {
+    public CarDestinationCriteria(String locationPickup, String dayPickup, String monthPickup, String yearPickup, String hourPickup, String minutePickup, String locationReturn, String dayReturn, String monthReturn, String yearReturn, String hourReturn, String minuteReturn, String numberOfDrivers) {
         this.locationPickup = locationPickup;
         this.dayPickup = dayPickup;
         this.monthPickup = monthPickup;

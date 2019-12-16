@@ -5,19 +5,19 @@ import com.zestcarrental.model.User;
 import com.zestcarrental.util.TitleType;
 
 public class CarDestinationCriteriaCreator {
-    public static final String TESTDATA_LOCATION_PICKUP = "Budapest";
-    public static final String TESTDATA_DAY_PICKUP = "17";
-    public static final String TESTDATA_MONTH_PICKUP = "2";
-    public static final String TESTDATA_YEAR_PICKUP = "2020";
-    public static final String TESTDATA_HOUR_PICKUP = "00";
-    public static final String TESTDATA_MINUTE_PICKUP = "15";
-    public static final String TESTDATA_LOCATION_RETURN = "Budapest";
-    public static final String TESTDATA_DAY_RETURN = "24";
-    public static final String TESTDATA_MONTH_RETURN = "2";
-    public static final String TESTDATA_YEAR_RETURN = "2020";
-    public static final String TESTDATA_HOUR_RETURN = "00";
-    public static final String TESTDATA_MINUTE_RETURN = "15";
-    public static final String TESTDATA_NUMBER_OF_DRIVERS = "1";
+    public static final String TESTDATA_LOCATION_PICKUP = "testdata.criteria.location_pickup";
+    public static final String TESTDATA_DAY_PICKUP = "testdata.criteria.day_pickup";
+    public static final String TESTDATA_MONTH_PICKUP = "testdata.criteria.month_pickup";
+    public static final String TESTDATA_YEAR_PICKUP = "testdata.criteria.year_pickup";
+    public static final String TESTDATA_HOUR_PICKUP = "testdata.criteria.hour_pickup";
+    public static final String TESTDATA_MINUTE_PICKUP = "testdata.criteria.minute_pickup";
+    public static final String TESTDATA_LOCATION_RETURN = "testdata.criteria.location_return";
+    public static final String TESTDATA_DAY_RETURN = "testdata.criteria.day_return";
+    public static final String TESTDATA_MONTH_RETURN = "testdata.criteria.month_return";
+    public static final String TESTDATA_YEAR_RETURN = "testdata.criteria.year_return";
+    public static final String TESTDATA_HOUR_RETURN = "testdata.criteria.hour_return";
+    public static final String TESTDATA_MINUTE_RETURN = "testdata.criteria.minute_return";
+    public static final String TESTDATA_NUMBER_OF_DRIVERS = "testdata.criteria.drivers_number";
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -26,19 +26,19 @@ public class CarDestinationCriteriaCreator {
 
     public static CarDestinationCriteria withCredentialsFromProperty(){
         return new CarDestinationCriteria(
-                TESTDATA_LOCATION_PICKUP,
-                TESTDATA_DAY_PICKUP,
-                TESTDATA_MONTH_PICKUP,
-                TESTDATA_YEAR_PICKUP,
-                TESTDATA_HOUR_PICKUP,
-                TESTDATA_MINUTE_PICKUP,
-                TESTDATA_LOCATION_RETURN,
-                TESTDATA_DAY_RETURN,
-                TESTDATA_MONTH_RETURN,
-                TESTDATA_YEAR_RETURN,
-                TESTDATA_HOUR_RETURN,
-                TESTDATA_MINUTE_RETURN,
-                Integer.getInteger(TESTDATA_NUMBER_OF_DRIVERS)
+                TestDataReader.getTestData(TESTDATA_LOCATION_PICKUP),
+                TestDataReader.getTestData(TESTDATA_DAY_PICKUP),
+                TestDataReader.getTestData(TESTDATA_MONTH_PICKUP),
+                TestDataReader.getTestData(TESTDATA_YEAR_PICKUP),
+                TestDataReader.getTestData(TESTDATA_HOUR_PICKUP),
+                TestDataReader.getTestData(TESTDATA_MINUTE_PICKUP),
+                TestDataReader.getTestData(TESTDATA_LOCATION_RETURN),
+                TestDataReader.getTestData(TESTDATA_DAY_RETURN),
+                TestDataReader.getTestData(TESTDATA_MONTH_RETURN),
+                TestDataReader.getTestData(TESTDATA_YEAR_RETURN),
+                TestDataReader.getTestData(TESTDATA_HOUR_RETURN),
+                TestDataReader.getTestData(TESTDATA_MINUTE_RETURN),
+                TestDataReader.getTestData(TESTDATA_NUMBER_OF_DRIVERS)
         );
     }
 
@@ -56,7 +56,7 @@ public class CarDestinationCriteriaCreator {
                 "",
                 "",
                 "",
-                0
+                ""
                 );
     }
 }

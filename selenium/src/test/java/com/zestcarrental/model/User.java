@@ -11,15 +11,15 @@ public class User {
     private TitleType titleType;
     private String firstName;
     private String lastName;
-    private int age;
+    private String age;
     private String mobileNumber;
     private String email;
     private String country;
     private String city;
-    private int postCode;
+    private String postCode;
     private String cardNumber;
     private String nameOnCard;
-    private int securityCode;
+    private String securityCode;
     private String addressLineFirst;
     private String addressLineSecond;
     private String telephoneNumber;
@@ -27,8 +27,8 @@ public class User {
     private String expireYearDate;
 
     public User(String username, String password, TitleType titleType, String firstName, String lastName,
-                int age, String mobileNumber, String email, String country, String city, int postCode,
-                String cardNumber, String nameOnCard, int securityCode, String addressLineFirst,
+                String age, String mobileNumber, String email, String country, String city, String postCode,
+                String cardNumber, String nameOnCard, String securityCode, String addressLineFirst,
                 String addressLineSecond, String telephoneNumber, String expireMonthDate, String expireYearDate) {
         this.username = username;
         this.password = password;
@@ -91,11 +91,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -131,11 +131,11 @@ public class User {
         this.city = city;
     }
 
-    public int getPostCode() {
+    public String getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(int postCode) {
+    public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 
@@ -155,11 +155,11 @@ public class User {
         this.nameOnCard = nameOnCard;
     }
 
-    public int getSecurityCode() {
+    public String getSecurityCode() {
         return securityCode;
     }
 
-    public void setSecurityCode(int securityCode) {
+    public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
     }
 

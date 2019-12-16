@@ -2,21 +2,22 @@ package com.zestcarrental.util;
 
 import com.zestcarrental.driver.DriverSingleton;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.LogManager;
 
 
-public class TestListener {
-    private Logger log = (Logger) LogManager.getLogManager();
+public class TestListener implements ITestListener {
+    private Logger log = LogManager.getRootLogger();
 
     public void onTestStart(ITestResult iTestResult) {
 
