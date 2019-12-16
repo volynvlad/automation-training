@@ -4,6 +4,7 @@ public class StringUtils {
     public static final String HOMEPAGE_URL = "https://www.zestcarrental.com/";
     public static final String QUOTE_DATES_URL = "https://www.zestcarrental.com/quote/dates/";
     public static final String QUOTE_RESULTS_URL = "https://www.zestcarrental.com/quote/results/";
+    public static final String BOOKING_EXTRAS_URL = "https://www.zestcarrental.com/booking/extras/";
 
     public static final String[] MONTHS =  {"January", "February", "March", "April", "May", "June",
                                                     "July", "August", "September", "October", "November", "December"};

@@ -21,6 +21,8 @@ public class BookingPagePayment extends AbstractPage {
 
     private static final String ID_SECURITY_CODE = "cv2_number";
 
+    private static final String ID_ERROR_MESSAGE = "pan";
+
     private static final String CSS_SELECTOR_CONTINUE = "button[class=\"button button--solid button--block button--green\"]";
 
 
@@ -38,6 +40,9 @@ public class BookingPagePayment extends AbstractPage {
 
     @FindBy(id = ID_SECURITY_CODE)
     private WebElement securityCodeInput;
+
+    @FindBy(id = ID_ERROR_MESSAGE)
+    private WebElement errorMessage;
 
     private WebElement continueButton = webDriver.findElement(By.cssSelector(CSS_SELECTOR_CONTINUE));
 
@@ -76,8 +81,12 @@ public class BookingPagePayment extends AbstractPage {
         return this;
     }
 
-    public BookingPagePayment nextStep() {
-        logger.info("Next step");
+    public String getErrorMessage() {
+
+    }
+
+    public BookingPagePayment pressContinue() {
+        logger.info("Press continue");
 
         continueButton.click();
 
