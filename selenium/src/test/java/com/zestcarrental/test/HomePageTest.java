@@ -6,16 +6,16 @@ import com.zestcarrental.service.CarDestinationCriteriaCreator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.zestcarrental.util.StringUtils.HOMEPAGE_URL;
+import static com.zestcarrental.util.StringUtils.QUOTE_DATES_URL;
 
 public class HomePageTest extends CommonConditions {
     @Test
     public void incorrectSearchForLocation() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
-        String url = new HomePage(driver)
+        boolean isNoLocationFound = new HomePage(driver)
                 .openPage()
-                .searchForLocation(criteria)
-                .getCurrentUrl();
-        Assert.assertEquals(url, HOMEPAGE_URL);
+                .writeLocation(criteria)
+                .isNoLocation();
+        Assert.assertTrue(isNoLocationFound);
     }
 }
