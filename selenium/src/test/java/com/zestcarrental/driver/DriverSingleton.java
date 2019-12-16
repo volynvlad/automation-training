@@ -15,13 +15,13 @@ public class DriverSingleton {
 
     public static WebDriver getDriver() {
         if (null == driver) {
-            switch ("asdf") {
+            switch ("chrome") {
                 case "firefox": {
                     FirefoxOptions options = new FirefoxOptions();
 
                     options.addArguments("--disable-extensions");
                     options.addArguments("--headless");
-                    options.addArguments("--dasable-gpu");
+                    options.addArguments("--disable-gpu");
                     options.addArguments("--no-sandbox");
                     options.addArguments("--window-size=1920,1080");
 
@@ -33,7 +33,7 @@ public class DriverSingleton {
 
                     options.addArguments("--disable-extensions");
                     options.addArguments("--headless");
-                    options.addArguments("--dasable-gpu");
+                    options.addArguments("--disable-gpu");
                     options.addArguments("--no-sandbox");
                     options.addArguments("--window-size=1920,1080");
 

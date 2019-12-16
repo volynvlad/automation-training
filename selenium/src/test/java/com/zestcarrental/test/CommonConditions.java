@@ -16,5 +16,5 @@ public class CommonConditions {
     public void setUp() { driver = DriverSingleton.getDriver(); }
 
     @AfterMethod(alwaysRun = true)
-    public void browserTurnDown() { driver.quit(); }
+    public void browserTurnDown() { DriverSingleton.closeDriver(); }
 }

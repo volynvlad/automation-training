@@ -3,31 +3,27 @@ package com.zestcarrental.service;
 import com.zestcarrental.model.User;
 import com.zestcarrental.util.TitleType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class UserCreator {
 
     public static final String TESTDATA_USER_NAME = "testdata.user.name";
     public static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
     public static final TitleType TEST_DATA_TYPE = TitleType.Mr;
-    public static final String TESTDATA_FIRSTNAME = "name";
-    public static final String TESTDATA_LASTNAME = "last";
+    public static final String TESTDATA_FIRSTNAME = "John";
+    public static final String TESTDATA_LASTNAME = "John";
     public static final int TESTDATA_AGE = 30;
-    public static final String TESTDATA_MOBILE_NUMBER = "111211";
-    public static final String TESTDATA_EMAIL = "asdfasdf@gmail.com";
-    public static final String TESTDATA_COUNTRY= "German";
-    public static final String TESTDATA_CITY = "Berlin";
-    public static final int TESTDATA_POSTCODE = 220000;
+    public static final String TESTDATA_MOBILE_NUMBER = "375292222222";
+    public static final String TESTDATA_EMAIL = "hjfbdjhsdf@gmail.com";
+    public static final String TESTDATA_COUNTRY= "Hungary";
+    public static final String TESTDATA_CITY = "Budapest";
+    public static final int TESTDATA_POSTCODE = 222;
     public static final String TESTDATA_CARDNUMBER = "2222222222222222";
-    public static final String TESTDATA_STRING_DATE = "27/12/2019 17:00:00";
-    public static final int TESTDATA_NUMBER_CARD = 220000;
-    public static final String TESTDATA_CARDNAME = "2222222222222222";
+    public static final String TESTDATA_CARDNAME = "asdfsdf";
     public static final int TESTDATA_SECURITYCARD = 222;
-    public static final String TESTDATA_ADDERSS_LINE_FIRST = "asdfasdf";
-    public static final String TESTDATA_ADDERSS_LINE_SECOND = "asdfasdf";
+    public static final String TESTDATA_ADDERSS_LINE_FIRST = "adsfasf";
+    public static final String TESTDATA_ADDERSS_LINE_SECOND = "adsfasf";
     public static final String TESTDATA_TELEPHONE_NUMBER = "22222222";
+    public static final String TESTDATA_EXPIRE_MONTH_DATE = "2";
+    public static final String TESTDATA_EXPIRE_YEAR_DATE = "2020";
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -51,33 +47,15 @@ public class UserCreator {
                 TESTDATA_SECURITYCARD,
                 TESTDATA_ADDERSS_LINE_FIRST,
                 TESTDATA_ADDERSS_LINE_SECOND,
-                TESTDATA_TELEPHONE_NUMBER
+                TESTDATA_TELEPHONE_NUMBER,
+                TESTDATA_EXPIRE_MONTH_DATE,
+                TESTDATA_EXPIRE_YEAR_DATE
                 );
     }
 
-    public static User withEmptyUsername(){
+    public static User withEmptyFields() {
         return new User(
-                "DEADINSIDE",
-                "OSHIHITEO",
-                TitleType.Mr,
-                "vlad",
-                "volynets",
-                28,
-                "37591074707",
-                "serious.blr@gmail.com",
-                "Germany",
-                "Berlin",
-                222222,
-                "823782378",
-                "84399743",
-                1,
-                "asddfasdf",
-                "asdfaad",
-                "222222");
-    }
-
-    public static User withEmptyPassword() {
-        return new User(TestDataReader.getTestData(TESTDATA_USER_NAME),
+                "",
                 "",
                 TitleType.Mr,
                 "",
@@ -91,6 +69,8 @@ public class UserCreator {
                 "",
                 "",
                 1,
+                "",
+                "",
                 "",
                 "",
                 "");

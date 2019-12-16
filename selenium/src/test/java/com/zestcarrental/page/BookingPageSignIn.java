@@ -1,15 +1,15 @@
 package com.zestcarrental.page;
 
+import com.zestcarrental.model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.PageFactoryFinder;
 
 import java.util.concurrent.TimeUnit;
 
-public class BookingSignIn extends AbstractPage {
+public class BookingPageSignIn extends AbstractPage {
     private static final String CLASS_NAME_CURRENT_STEP = "current";
 
     private static final String CLASS_NAME_CONTINUE = "button button--solid button--block button--green";
@@ -38,13 +38,13 @@ public class BookingSignIn extends AbstractPage {
     @FindBy(id = ID_CUSTOMER_PASSWORD)
     private WebElement customerPasswordInput;
 
-    public BookingSignIn(WebDriver webDriver) {
+    public BookingPageSignIn(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(this.webDriver, this);
     }
 
     @Override
-    public BookingSignIn openPage() {
+    public BookingPageSignIn openPage() {
         logger.info("Open booking sing in page");
 
         webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -52,22 +52,22 @@ public class BookingSignIn extends AbstractPage {
         return this;
     }
 
-    public BookingSignIn fillForm(boolean isNew, String customerMail, String customerPassword) {
+    public BookingPageSignIn fillForm(boolean isNew, User user) {
         logger.info("Fill sing in form");
 
         if (isNew) {
             newTypeCustomerLabel.click();
 
             customerMailInput.click();
-            customerMailInput.sendKeys(customerMail);
+            customerMailInput.sendKeys(user.getEmail());
         } else {
             repeatTypeCustomerLabel.click();
 
             customerMailInput.click();
-            customerMailInput.sendKeys(customerMail);
+            customerMailInput.sendKeys(user.getEmail());
 
             customerPasswordInput.click();
-            customerPasswordInput.sendKeys(customerPassword);
+            customerPasswordInput.sendKeys(user.getPassword());
         }
 
         return this;

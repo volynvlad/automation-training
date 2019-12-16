@@ -1,5 +1,7 @@
 package com.zestcarrental.page;
 
+import com.zestcarrental.model.CarDestinationCriteria;
+import com.zestcarrental.model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -120,22 +122,21 @@ public class DateQuotePage extends AbstractPage {
         return datePickerYear.getAttribute("value");
     }
 
-    public DateQuotePage choosePickupDate(int day, String month, int year) {
+    public DateQuotePage choosePickupDate(CarDestinationCriteria criteria) {
         logger.info("Choose pickup date");
 
-        int chosenDay = Integer.parseInt(this.getDatePickerDay());
         String chosenMonth = this.getDatePickerMonth();
         int chosenYear = Integer.parseInt(this.getDatePickerYear());
 
         while (true) {
-            if (year > chosenYear) {
+            if (Integer.parseInt(criteria.getYearPickup()) > chosenYear) {
                 pickupCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-            } else if (year < chosenYear) {
+            } else if (Integer.parseInt(criteria.getYearPickup()) < chosenYear) {
                 pickupCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
             } else {
-                if (findIndex(MONTHS, month) > findIndex(MONTHS, chosenMonth)) {
+                if (findIndex(MONTHS, criteria.getMonthPickup()) > findIndex(MONTHS, chosenMonth)) {
                     pickupCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-                } else if (findIndex(MONTHS, month) < findIndex(MONTHS, chosenMonth)) {
+                } else if (findIndex(MONTHS, criteria.getMonthPickup()) < findIndex(MONTHS, chosenMonth)) {
                     pickupCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
                 } else {
                     break;
@@ -144,28 +145,27 @@ public class DateQuotePage extends AbstractPage {
         }
 
         pickupCalendar.findElements(By.xpath(CLASS_NAME_DAY)).stream()
-                .filter(e -> e.getText().equals(String.valueOf(day)))
+                .filter(e -> e.getText().equals(String.valueOf(criteria.getDayPickup())))
                 .forEach(WebElement::click);
 
         return this;
     }
 
-    public DateQuotePage chooseReturnDate(int day, String month, int year) {
+    public DateQuotePage chooseReturnDate(CarDestinationCriteria criteria) {
         logger.info("Choose return date");
 
-        int chosenDay = Integer.parseInt(this.getDatePickerDay());
         String chosenMonth = this.getDatePickerMonth();
         int chosenYear = Integer.parseInt(this.getDatePickerYear());
 
         while (true) {
-            if (year > chosenYear) {
+            if (Integer.parseInt(criteria.getYearReturn()) > chosenYear) {
                 returnCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-            } else if (year < chosenYear) {
+            } else if (Integer.parseInt(criteria.getYearReturn()) < chosenYear) {
                 returnCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
             } else {
-                if (findIndex(MONTHS, month) > findIndex(MONTHS, chosenMonth)) {
+                if (findIndex(MONTHS, criteria.getMonthReturn()) > findIndex(MONTHS, chosenMonth)) {
                     returnCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-                } else if (findIndex(MONTHS, month) < findIndex(MONTHS, chosenMonth)) {
+                } else if (findIndex(MONTHS, criteria.getMonthReturn()) < findIndex(MONTHS, chosenMonth)) {
                     returnCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
                 } else {
                     break;
@@ -174,45 +174,45 @@ public class DateQuotePage extends AbstractPage {
         }
 
         returnCalendar.findElements(By.xpath(CLASS_NAME_DAY)).stream()
-                .filter(e -> e.getText().equals(String.valueOf(day)))
+                .filter(e -> e.getText().equals(String.valueOf(criteria.getDayReturn())))
                 .forEach(WebElement::click);
 
         return this;
     }
 
-    public DateQuotePage choosePickupTime(int hour, int minute) {
+    public DateQuotePage choosePickupTime(CarDestinationCriteria criteria) {
         logger.info("Choose pickup time");
 
         pickupHour.click();
 
-        dropdownPickupHour.stream().filter(e -> e.getText().equals(String.valueOf(hour))).forEach(WebElement::click);
+        dropdownPickupHour.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getHourPickup()))).forEach(WebElement::click);
 
         pickupMinute.click();
 
-        dropdownPickupMinute.stream().filter(e -> e.getText().equals(String.valueOf(minute))).forEach(WebElement::click);
+        dropdownPickupMinute.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getMinutePickup()))).forEach(WebElement::click);
 
         return this;
     }
 
-    public DateQuotePage chooseReturnTime(int hour, int minute) {
+    public DateQuotePage chooseReturnTime(CarDestinationCriteria criteria) {
         logger.info("Choose return time");
 
         returnHour.click();
 
-        dropdownReturnHour.stream().filter(e -> e.getText().equals(String.valueOf(hour))).forEach(WebElement::click);
+        dropdownReturnHour.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getHourReturn()))).forEach(WebElement::click);
 
         returnMinute.click();
 
-        dropdownReturnMinute.stream().filter(e -> e.getText().equals(String.valueOf(minute))).forEach(WebElement::click);
+        dropdownReturnMinute.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getMinuteReturn()))).forEach(WebElement::click);
 
         return this;
     }
 
-    public DateQuotePage inputDriverAge(int age) {
+    public DateQuotePage inputDriverAge(User user) {
         logger.info("Input driver age");
 
         inputDriverAge.click();
-        inputDriverAge.sendKeys(String.valueOf(age));
+        inputDriverAge.sendKeys(String.valueOf(user.getAge()));
 
         return this;
     }

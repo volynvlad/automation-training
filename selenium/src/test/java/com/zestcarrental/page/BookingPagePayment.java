@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class BookingPayment extends AbstractPage {
+public class BookingPagePayment extends AbstractPage {
 
     private static final String ID_CARD_NUMBER = "card_number";
 
@@ -41,13 +41,13 @@ public class BookingPayment extends AbstractPage {
 
     private WebElement continueButton = webDriver.findElement(By.cssSelector(CSS_SELECTOR_CONTINUE));
 
-    public BookingPayment(WebDriver webDriver) {
+    public BookingPagePayment(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(this.webDriver, this);
     }
 
     @Override
-    public BookingPayment openPage() {
+    public BookingPagePayment openPage() {
         logger.info("Open booking payment page");
 
         webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -55,7 +55,7 @@ public class BookingPayment extends AbstractPage {
         return this;
     }
 
-    public BookingPayment fillForm(User user) {
+    public BookingPagePayment fillForm(User user) {
         logger.info("Fill payment details form");
 
         cardNumberInput.click();
@@ -76,11 +76,11 @@ public class BookingPayment extends AbstractPage {
         return this;
     }
 
-    public BookingPayment nextStep() {
+    public BookingPagePayment nextStep() {
         logger.info("Next step");
 
         continueButton.click();
 
-        return new BookingPayment(webDriver);
+        return new BookingPagePayment(webDriver);
     }
 }

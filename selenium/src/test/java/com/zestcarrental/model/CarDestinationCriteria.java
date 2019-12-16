@@ -4,35 +4,72 @@ import java.util.Objects;
 
 public class CarDestinationCriteria {
 
-    private String locationPickUp;
-    private String datePickUp;
+    private String locationPickup;
+
+    private String dayPickup;
+    private String monthPickup;
+    private String yearPickup;
+
+    private String hourPickup;
+    private String minutePickup;
+
     private String locationReturn;
-    private String dateReturn;
+
+    private String dayReturn;
+    private String monthReturn;
+    private String yearReturn;
+
+    private String hourReturn;
+    private String minuteReturn;
 
     private int numberOfDrivers;
 
-    public CarDestinationCriteria(String locationPickUp, String datePickUp, String locationReturn, String dateReturn, int numberOfDrivers) {
-        this.locationPickUp = locationPickUp;
-        this.datePickUp = datePickUp;
-        this.locationReturn = locationReturn;
-        this.dateReturn = dateReturn;
-        this.numberOfDrivers = numberOfDrivers;
+    public String getLocationPickup() {
+        return locationPickup;
     }
 
-    public String getLocationPickUp() {
-        return locationPickUp;
+    public void setLocationPickup(String locationPickup) {
+        this.locationPickup = locationPickup;
     }
 
-    public void setLocationPickUp(String locationPickUp) {
-        this.locationPickUp = locationPickUp;
+    public String getDayPickup() {
+        return dayPickup;
     }
 
-    public String getDatePickUp() {
-        return datePickUp;
+    public void setDayPickup(String dayPickup) {
+        this.dayPickup = dayPickup;
     }
 
-    public void setDatePickUp(String datePickUp) {
-        this.datePickUp = datePickUp;
+    public String getMonthPickup() {
+        return monthPickup;
+    }
+
+    public void setMonthPickup(String monthPickup) {
+        this.monthPickup = monthPickup;
+    }
+
+    public String getYearPickup() {
+        return yearPickup;
+    }
+
+    public void setYearPickup(String yearPickup) {
+        this.yearPickup = yearPickup;
+    }
+
+    public String getHourPickup() {
+        return hourPickup;
+    }
+
+    public void setHourPickup(String hourPickup) {
+        this.hourPickup = hourPickup;
+    }
+
+    public String getMinutePickup() {
+        return minutePickup;
+    }
+
+    public void setMinutePickup(String minutePickup) {
+        this.minutePickup = minutePickup;
     }
 
     public String getLocationReturn() {
@@ -43,12 +80,44 @@ public class CarDestinationCriteria {
         this.locationReturn = locationReturn;
     }
 
-    public String getDateReturn() {
-        return dateReturn;
+    public String getDayReturn() {
+        return dayReturn;
     }
 
-    public void setDateReturn(String dateReturn) {
-        this.dateReturn = dateReturn;
+    public void setDayReturn(String dayReturn) {
+        this.dayReturn = dayReturn;
+    }
+
+    public String getMonthReturn() {
+        return monthReturn;
+    }
+
+    public void setMonthReturn(String monthReturn) {
+        this.monthReturn = monthReturn;
+    }
+
+    public String getYearReturn() {
+        return yearReturn;
+    }
+
+    public void setYearReturn(String yearReturn) {
+        this.yearReturn = yearReturn;
+    }
+
+    public String getHourReturn() {
+        return hourReturn;
+    }
+
+    public void setHourReturn(String hourReturn) {
+        this.hourReturn = hourReturn;
+    }
+
+    public String getMinuteReturn() {
+        return minuteReturn;
+    }
+
+    public void setMinuteReturn(String minuteReturn) {
+        this.minuteReturn = minuteReturn;
     }
 
     public int getNumberOfDrivers() {
@@ -59,15 +128,20 @@ public class CarDestinationCriteria {
         this.numberOfDrivers = numberOfDrivers;
     }
 
-    @Override
-    public String toString() {
-        return "CarDestinationCriteria{" +
-                "locationPickUp='" + locationPickUp + '\'' +
-                ", datePickUp='" + datePickUp + '\'' +
-                ", locationReturn='" + locationReturn + '\'' +
-                ", dateReturn='" + dateReturn + '\'' +
-                ", numberOfDrivers=" + numberOfDrivers +
-                '}';
+    public CarDestinationCriteria(String locationPickup, String dayPickup, String monthPickup, String yearPickup, String hourPickup, String minutePickup, String locationReturn, String dayReturn, String monthReturn, String yearReturn, String hourReturn, String minuteReturn, int numberOfDrivers) {
+        this.locationPickup = locationPickup;
+        this.dayPickup = dayPickup;
+        this.monthPickup = monthPickup;
+        this.yearPickup = yearPickup;
+        this.hourPickup = hourPickup;
+        this.minutePickup = minutePickup;
+        this.locationReturn = locationReturn;
+        this.dayReturn = dayReturn;
+        this.monthReturn = monthReturn;
+        this.yearReturn = yearReturn;
+        this.hourReturn = hourReturn;
+        this.minuteReturn = minuteReturn;
+        this.numberOfDrivers = numberOfDrivers;
     }
 
     @Override
@@ -76,14 +150,41 @@ public class CarDestinationCriteria {
         if (o == null || getClass() != o.getClass()) return false;
         CarDestinationCriteria that = (CarDestinationCriteria) o;
         return numberOfDrivers == that.numberOfDrivers &&
-                Objects.equals(locationPickUp, that.locationPickUp) &&
-                Objects.equals(datePickUp, that.datePickUp) &&
+                Objects.equals(locationPickup, that.locationPickup) &&
+                Objects.equals(dayPickup, that.dayPickup) &&
+                Objects.equals(monthPickup, that.monthPickup) &&
+                Objects.equals(yearPickup, that.yearPickup) &&
+                Objects.equals(hourPickup, that.hourPickup) &&
+                Objects.equals(minutePickup, that.minutePickup) &&
                 Objects.equals(locationReturn, that.locationReturn) &&
-                Objects.equals(dateReturn, that.dateReturn);
+                Objects.equals(dayReturn, that.dayReturn) &&
+                Objects.equals(monthReturn, that.monthReturn) &&
+                Objects.equals(yearReturn, that.yearReturn) &&
+                Objects.equals(hourReturn, that.hourReturn) &&
+                Objects.equals(minuteReturn, that.minuteReturn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(locationPickUp, datePickUp, locationReturn, dateReturn, numberOfDrivers);
+        return Objects.hash(locationPickup, dayPickup, monthPickup, yearPickup, hourPickup, minutePickup, locationReturn, dayReturn, monthReturn, yearReturn, hourReturn, minuteReturn, numberOfDrivers);
+    }
+
+    @Override
+    public String toString() {
+        return "CarDestinationCriteria{" +
+                "locationPickup='" + locationPickup + '\'' +
+                ", dayPickup='" + dayPickup + '\'' +
+                ", monthPickup='" + monthPickup + '\'' +
+                ", yearPickup='" + yearPickup + '\'' +
+                ", hourPickup='" + hourPickup + '\'' +
+                ", minutePickup='" + minutePickup + '\'' +
+                ", locationReturn='" + locationReturn + '\'' +
+                ", dayReturn='" + dayReturn + '\'' +
+                ", monthReturn='" + monthReturn + '\'' +
+                ", yearReturn='" + yearReturn + '\'' +
+                ", hourReturn='" + hourReturn + '\'' +
+                ", minuteReturn='" + minuteReturn + '\'' +
+                ", numberOfDrivers=" + numberOfDrivers +
+                '}';
     }
 }

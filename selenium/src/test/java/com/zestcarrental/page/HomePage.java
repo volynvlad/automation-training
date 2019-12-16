@@ -1,5 +1,6 @@
 package com.zestcarrental.page;
 
+import com.zestcarrental.model.CarDestinationCriteria;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,11 +39,11 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public DateQuotePage searchForLocation(String location) {
+    public DateQuotePage searchForLocation(CarDestinationCriteria criteria) {
         logger.info("Type location name in search input");
 
         searchPickup.click();
-        searchPickup.sendKeys(location);
+        searchPickup.sendKeys(criteria.getLocationPickup());
         searchPickup.click();
         berlinDropDownButton.click();
         buttonGo.click();

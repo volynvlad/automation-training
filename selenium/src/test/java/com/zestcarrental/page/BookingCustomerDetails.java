@@ -150,11 +150,11 @@ public class BookingCustomerDetails extends AbstractPage {
         return this;
     }
 
-    public BookingPayment continueToPayment() {
+    public BookingPagePayment continueToPayment() {
         logger.info("Continue to payment");
 
         continueToPayment.click();
 
-        return new BookingPayment(webDriver);
+        return new BookingPagePayment(webDriver);
     }
 }
