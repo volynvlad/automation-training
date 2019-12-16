@@ -21,7 +21,8 @@ public class DateQuotePageTest extends CommonConditions {
         String errorMessage = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)
@@ -32,7 +33,7 @@ public class DateQuotePageTest extends CommonConditions {
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_TIME);
     }
 
-    @Test
+    //@Test
     public void bookingPickupBeforeReturn() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -40,7 +41,8 @@ public class DateQuotePageTest extends CommonConditions {
         String errorMessage = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)
@@ -51,7 +53,7 @@ public class DateQuotePageTest extends CommonConditions {
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_TIME);
     }
 
-    @Test
+    //@Test
     public void bookingPickupTooLate() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -59,7 +61,8 @@ public class DateQuotePageTest extends CommonConditions {
         String errorMessage = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)
@@ -70,7 +73,7 @@ public class DateQuotePageTest extends CommonConditions {
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_BOOK_DATE_ORDER);
     }
 
-    @Test
+    //@Test
     public void bookingPickupAndReturnTooLong() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -78,7 +81,8 @@ public class DateQuotePageTest extends CommonConditions {
         String errorMessage = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)
@@ -89,7 +93,7 @@ public class DateQuotePageTest extends CommonConditions {
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_BOOK_TOO_LONG);
     }
 
-    @Test
+    //@Test
     public void driverAgeTooSmall() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -97,7 +101,8 @@ public class DateQuotePageTest extends CommonConditions {
         String errorMessage = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)

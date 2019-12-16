@@ -29,7 +29,9 @@ public class HomePage extends AbstractPage {
 
     private static final String ATTRIBUTE_DATA_NAME = "data-name";
 
-    private static final String CSS_SELECTOR_RETURN_LABEL = "for=\"search_different_return_location\"";
+    private static final String CSS_SELECTOR_RETURN_LABEL = "label[for=\"search_different_return_location\"]";
+
+    private static final String ABSOLUTE_PATH_RETURN_LABEL = "/html/body/div[1]/div/section[1]/div/div[2]/form/label";
 
     @FindBy(id = SEARCH_PICKUP_ID)
     private WebElement searchPickup;
@@ -37,7 +39,7 @@ public class HomePage extends AbstractPage {
     @FindBy(className = SEARCH_BUTTON_SUBMIT_CLASSNAME)
     private WebElement buttonGo;
 
-    @FindBy(css = CSS_SELECTOR_RETURN_LABEL)
+    @FindBy(xpath = ABSOLUTE_PATH_RETURN_LABEL)
     private WebElement returnLabel;
 
     private List<WebElement> pickupElements;
@@ -61,6 +63,12 @@ public class HomePage extends AbstractPage {
     public HomePage pressReturnLabel() {
         logger.info("Press return label");
 
+
+        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CSS_SELECTOR_RETURN_LABEL)));
+
+        returnLabel = webDriver.findElement(By.cssSelector(CSS_SELECTOR_RETURN_LABEL));
+
         returnLabel.click();
 
         return this;
@@ -81,14 +89,6 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public HomePage chooseReturnLocation(CarDestinationCriteria criteria) {
-        logger.info("Choose return location");
-
-        returnElements.stream().filter(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(criteria.getLocationPickup())).forEach(WebElement::click);
-
-        return this;
-    }
-
     public boolean isNoLocation() {
         logger.info("Is no location");
 
@@ -101,14 +101,32 @@ public class HomePage extends AbstractPage {
         return false;
     }
 
-    public DateQuotePage searchForLocation(CarDestinationCriteria criteria) {
+    public HomePage choosePickupLocationFromDropdown(CarDestinationCriteria criteria) {
         logger.info("Search for location");
 
         pickupElements.stream().filter(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(criteria.getLocationPickup())).forEach(WebElement::click);
+
+        return this;
+    }
+
+    public HomePage chooseReturnLocationFromDropdown(CarDestinationCriteria criteria) {
+        logger.info("Choose return location");
+
+        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_FIELD_SUGGESTIONS)));
+
+        returnElements = webDriver.findElements(By.className(CLASS_NAME_FIELD_SUGGESTIONS));
+
+        returnElements.stream().filter(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(criteria.getLocationPickup())).forEach(WebElement::click);
+
+        return this;
+    }
+
+    public DateQuotePage pressGoButton() {
+        logger.info("Press go button");
+
         buttonGo.click();
 
         return new DateQuotePage(webDriver);
     }
-
-
 }

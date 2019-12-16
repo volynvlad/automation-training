@@ -1,10 +1,9 @@
 package com.zestcarrental.service;
 
 import com.zestcarrental.model.CarDestinationCriteria;
-import com.zestcarrental.model.User;
-import com.zestcarrental.util.TitleType;
 
 public class CarDestinationCriteriaCreator {
+
     public static final String TESTDATA_LOCATION_PICKUP = "testdata.criteria.location_pickup";
     public static final String TESTDATA_DAY_PICKUP = "testdata.criteria.day_pickup";
     public static final String TESTDATA_MONTH_PICKUP = "testdata.criteria.month_pickup";
@@ -24,7 +23,7 @@ public class CarDestinationCriteriaCreator {
         return super.clone();
     }
 
-    public static CarDestinationCriteria withCredentialsFromProperty(){
+    public static CarDestinationCriteria withCredentialsFromProperty() {
         return new CarDestinationCriteria(
                 TestDataReader.getTestData(TESTDATA_LOCATION_PICKUP),
                 TestDataReader.getTestData(TESTDATA_DAY_PICKUP),

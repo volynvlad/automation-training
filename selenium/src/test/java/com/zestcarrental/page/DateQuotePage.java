@@ -21,11 +21,8 @@ public class DateQuotePage extends AbstractPage {
     private static final String ABSOLUTE_PATH_PICKUP_CALENDAR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/h3[1]";
     private static final String ABSOLUTE_PATH_RETURN_CALENDAR= "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/h3[1]";
 
-    private static final String CLASS_NAME_PREV_BUTTON = "ui-datepicker-prev ui-corner-all";
-    private static final String CLASS_NAME_NEXT_BUTTON = "ui-datepicker-next ui-corner-all";
-
     private static final String CLASS_NAME_CURRENT_DAY = "ui-state-default ui-state-highlight ui-state-active";
-    private static final String CLASS_NAME_DAY = "//a[@class='ui-state-default']";
+    private static final String CLASS_NAME_DAY = "ui-state-default";
     private static final String CLASS_NAME_MONTH = "ui-datepicker-month";
     private static final String CLASS_NAME_YEAR = "ui-datepicker-year";
 
@@ -44,6 +41,10 @@ public class DateQuotePage extends AbstractPage {
 
     private static final String CLASS_NAME_FEEDBACK_MESSAGE = "feedback--is_error";
 
+    private static final String ABSOLUTE_PATH_PICKUP_PREV = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[2]/div[2]/div/div/a[1]";
+    private static final String ABSOLUTE_PATH_PICKUP_NEXT = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[2]/div[2]/div/div/a[2]";
+    private static final String ABSOLUTE_PATH_RETURN_PREV = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[2]/div[2]/div/div/a[1]";
+    private static final String ABSOLUTE_PATH_RETURN_NEXT = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[2]/div[2]/div/div/a[2]";
 
     @FindBy(className = CLASS_NAME_CALENDAR)
     private WebElement datePickUpCalendar;
@@ -53,12 +54,6 @@ public class DateQuotePage extends AbstractPage {
 
     @FindBy(xpath = ABSOLUTE_PATH_RETURN_CALENDAR)
     private WebElement returnCalendar;
-
-    @FindBy(className = CLASS_NAME_PREV_BUTTON)
-    private WebElement prevButton;
-
-    @FindBy(className = CLASS_NAME_NEXT_BUTTON)
-    private WebElement nextButton;
 
     @FindBy(className = CLASS_NAME_CURRENT_DAY)
     private WebElement currentDatePickerDay;
@@ -116,15 +111,15 @@ public class DateQuotePage extends AbstractPage {
     }
 
     public String getDatePickerDay() {
-        return currentDatePickerDay.getAttribute("value");
+        return currentDatePickerDay.getText();
     }
 
     public String getDatePickerMonth() {
-        return datePickerMonth.getAttribute("value");
+        return datePickerMonth.getText();
     }
 
     public String getDatePickerYear() {
-        return datePickerYear.getAttribute("value");
+        return datePickerYear.getText();
     }
 
     public DateQuotePage choosePickupDate(CarDestinationCriteria criteria) {
@@ -134,15 +129,19 @@ public class DateQuotePage extends AbstractPage {
         int chosenYear = Integer.parseInt(this.getDatePickerYear());
 
         while (true) {
-            if (Integer.parseInt(criteria.getYearPickup()) > chosenYear) {
-                pickupCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-            } else if (Integer.parseInt(criteria.getYearPickup()) < chosenYear) {
-                pickupCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+            if (Integer.parseInt(criteria.getYearPickup()) < chosenYear) {
+                pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_PREV)).click();
+                chosenYear = Integer.parseInt(this.getDatePickerYear());
+            } else if (Integer.parseInt(criteria.getYearPickup()) > chosenYear) {
+                pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_NEXT)).click();
+                chosenYear = Integer.parseInt(this.getDatePickerYear());
             } else {
-                if (findIndex(MONTHS, criteria.getMonthPickup()) > findIndex(MONTHS, chosenMonth)) {
-                    pickupCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-                } else if (findIndex(MONTHS, criteria.getMonthPickup()) < findIndex(MONTHS, chosenMonth)) {
-                    pickupCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                if (findIndex(MONTHS, criteria.getMonthPickup()) < findIndex(MONTHS, chosenMonth)) {
+                    pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_PREV)).click();
+                    chosenMonth = this.getDatePickerMonth();
+                } else if (findIndex(MONTHS, criteria.getMonthPickup()) > findIndex(MONTHS, chosenMonth)) {
+                    pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_NEXT)).click();
+                    chosenMonth = this.getDatePickerMonth();
                 } else {
                     break;
                 }
@@ -163,23 +162,27 @@ public class DateQuotePage extends AbstractPage {
         int chosenYear = Integer.parseInt(this.getDatePickerYear());
 
         while (true) {
-            if (Integer.parseInt(criteria.getYearReturn()) > chosenYear) {
-                returnCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-            } else if (Integer.parseInt(criteria.getYearReturn()) < chosenYear) {
-                returnCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+            if (Integer.parseInt(criteria.getYearReturn()) < chosenYear) {
+                returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_PREV)).click();
+                chosenYear = Integer.parseInt(this.getDatePickerYear());
+            } else if (Integer.parseInt(criteria.getYearReturn()) > chosenYear) {
+                returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_NEXT)).click();
+                chosenYear = Integer.parseInt(this.getDatePickerYear());
             } else {
-                if (findIndex(MONTHS, criteria.getMonthReturn()) > findIndex(MONTHS, chosenMonth)) {
-                    returnCalendar.findElement(By.className(CLASS_NAME_PREV_BUTTON)).click();
-                } else if (findIndex(MONTHS, criteria.getMonthReturn()) < findIndex(MONTHS, chosenMonth)) {
-                    returnCalendar.findElement(By.className(CLASS_NAME_NEXT_BUTTON)).click();
+                if (findIndex(MONTHS, criteria.getMonthReturn()) < findIndex(MONTHS, chosenMonth)) {
+                    returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_PREV)).click();
+                    chosenMonth = this.getDatePickerMonth();
+                } else if (findIndex(MONTHS, criteria.getMonthReturn()) > findIndex(MONTHS, chosenMonth)) {
+                    returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_NEXT)).click();
+                    chosenMonth = this.getDatePickerMonth();
                 } else {
                     break;
                 }
             }
         }
 
-        returnCalendar.findElements(By.xpath(CLASS_NAME_DAY)).stream()
-                .filter(e -> e.getText().equals(String.valueOf(criteria.getDayReturn())))
+        returnCalendar.findElements(By.className(CLASS_NAME_DAY)).stream()
+                .filter(e -> e.getText().equals(criteria.getDayReturn()))
                 .forEach(WebElement::click);
 
         return this;

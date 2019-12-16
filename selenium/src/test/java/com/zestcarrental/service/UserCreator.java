@@ -31,7 +31,8 @@ public class UserCreator {
     }
 
     public static User withCredentialsFromProperty(){
-        return new User(TestDataReader.getTestData(TESTDATA_USER_NAME),
+        return new User(
+                TestDataReader.getTestData(TESTDATA_USER_NAME),
                 TestDataReader.getTestData(TESTDATA_USER_PASSWORD),
                 TEST_DATA_TYPE,
                 TestDataReader.getTestData(TESTDATA_FIRSTNAME),

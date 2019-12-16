@@ -12,7 +12,7 @@ import static com.zestcarrental.util.StringUtils.BOOKING_EXTRAS_URL;
 import static com.zestcarrental.util.StringUtils.ERROR_MESSAGE_TOO_SMALL_DRIVER_AGE;
 
 public class BookingPageExtrasTest extends CommonConditions {
-    @Test
+    //@Test
     public void correctAppearsOnBookingPageExtras() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -22,7 +22,8 @@ public class BookingPageExtrasTest extends CommonConditions {
         String currentUrl = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)

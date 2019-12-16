@@ -13,22 +13,25 @@ public class HomePageTest extends CommonConditions {
     @Test
     public void incorrectSearchForLocation() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
+
         boolean isNoLocationFound = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
                 .isNoLocation();
+
         Assert.assertTrue(isNoLocationFound);
     }
 
     @Test
     public void withReturnLocationChoice() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
+
         String url = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
                 .pressReturnLabel()
-                .chooseReturnLocation(criteria)
-                .searchForLocation(criteria)
+                .pressGoButton()
                 .getCurrentUrl();
 
         Assert.assertEquals(url, QUOTE_DATES_URL);

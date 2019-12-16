@@ -14,6 +14,5 @@ public class StringUtils {
     public static final String ERROR_MESSAGE_TOO_SMALL_DRIVER_AGE = "There are no vehicles available for a driver of age 24.";
     public static final String CURRENCY_EUR = "EUR (€)";
     public static final String CURRENCY_GBP = "GBP (£)";
-
-
+    public static final String ERROR_MESSAGE_VALID_CARD = "Please enter a valid card number.";
 }

@@ -5,22 +5,24 @@ import com.zestcarrental.model.User;
 import com.zestcarrental.page.HomePage;
 import com.zestcarrental.service.CarDestinationCriteriaCreator;
 import com.zestcarrental.service.UserCreator;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static com.zestcarrental.util.StringUtils.ERROR_MESSAGE_VALID_CARD;
+
 public class CompleteTest extends CommonConditions {
-    @Test
+    //@Test
     public void completeTest() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
 
-        boolean isNew = false
-
         int carNumber = 1;
 
-        String currentUrl = new HomePage(driver)
+        String errorMessage = new HomePage(driver)
                 .openPage()
                 .writePickupLocation(criteria)
-                .searchForLocation(criteria)
+                .choosePickupLocationFromDropdown(criteria)
+                .pressGoButton()
                 .choosePickupDate(criteria)
                 .choosePickupTime(criteria)
                 .chooseReturnDate(criteria)
@@ -38,7 +40,8 @@ public class CompleteTest extends CommonConditions {
                 .fillForm(user)
                 .continueToPayment()
                 .fillForm(user)
-                .pressContinue();
-
+                .pressContinue()
+                .getErrorMessage();
+        Assert.assertEquals(ERROR_MESSAGE_VALID_CARD, errorMessage);
     }
 }

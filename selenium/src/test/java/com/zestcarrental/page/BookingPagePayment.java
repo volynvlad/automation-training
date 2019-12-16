@@ -82,7 +82,7 @@ public class BookingPagePayment extends AbstractPage {
     }
 
     public String getErrorMessage() {
-
+        return errorMessage.getText();
     }
 
     public BookingPagePayment pressContinue() {
