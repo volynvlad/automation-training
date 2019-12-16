@@ -19,6 +19,8 @@ public class HomePage extends AbstractPage {
 
     private static final String SEARCH_PICKUP_ID = "search_pickup_location_name";
 
+    private static final String SEARCH_RETURN_ID = "search_return_location_name";
+
     private static final String SEARCH_BUTTON_SUBMIT_CLASSNAME = "search_form__submit";
 
     private static final String CLASS_NAME_FIELD_SUGGESTIONS = "field_suggestions__suggestion";
@@ -27,13 +29,20 @@ public class HomePage extends AbstractPage {
 
     private static final String ATTRIBUTE_DATA_NAME = "data-name";
 
+    private static final String CSS_SELECTOR_RETURN_LABEL = "for=\"search_different_return_location\"";
+
     @FindBy(id = SEARCH_PICKUP_ID)
     private WebElement searchPickup;
 
     @FindBy(className = SEARCH_BUTTON_SUBMIT_CLASSNAME)
     private WebElement buttonGo;
 
-    private List<WebElement> elements;
+    @FindBy(css = CSS_SELECTOR_RETURN_LABEL)
+    private WebElement returnLabel;
+
+    private List<WebElement> pickupElements;
+
+    private List<WebElement> returnElements;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -49,8 +58,16 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public HomePage writeLocation(CarDestinationCriteria criteria) {
-        logger.info("Write location");
+    public HomePage pressReturnLabel() {
+        logger.info("Press return label");
+
+        returnLabel.click();
+
+        return this;
+    }
+
+    public HomePage writePickupLocation(CarDestinationCriteria criteria) {
+        logger.info("Write pickup location");
 
         searchPickup.click();
         searchPickup.sendKeys(criteria.getLocationPickup());
@@ -58,7 +75,16 @@ public class HomePage extends AbstractPage {
 
         WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_FIELD_SUGGESTIONS)));
-        elements = webDriver.findElements(By.className(CLASS_NAME_FIELD_SUGGESTIONS));
+
+        pickupElements = webDriver.findElements(By.className(CLASS_NAME_FIELD_SUGGESTIONS));
+
+        return this;
+    }
+
+    public HomePage chooseReturnLocation(CarDestinationCriteria criteria) {
+        logger.info("Choose return location");
+
+        returnElements.stream().filter(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(criteria.getLocationPickup())).forEach(WebElement::click);
 
         return this;
     }
@@ -66,7 +92,7 @@ public class HomePage extends AbstractPage {
     public boolean isNoLocation() {
         logger.info("Is no location");
 
-        for (WebElement element : elements) {
+        for (WebElement element : pickupElements) {
             if(element.getAttribute(ATTRIBUTE_DATA_NAME).equals(ATTRIBUTE_DATA_NAME_FAIL_SEARCH)) {
                 return true;
             }
@@ -78,15 +104,11 @@ public class HomePage extends AbstractPage {
     public DateQuotePage searchForLocation(CarDestinationCriteria criteria) {
         logger.info("Search for location");
 
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        elements.stream().filter(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(criteria.getLocationPickup())).forEach(WebElement::click);
+        pickupElements.stream().filter(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(criteria.getLocationPickup())).forEach(WebElement::click);
         buttonGo.click();
 
         return new DateQuotePage(webDriver);
     }
+
+
 }

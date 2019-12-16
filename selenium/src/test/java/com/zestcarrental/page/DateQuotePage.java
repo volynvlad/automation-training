@@ -42,6 +42,8 @@ public class DateQuotePage extends AbstractPage {
     private static final String ABSOLUTE_PATH_INPUT_DRIVER_AGE = "/html/body/div[1]/div/section[1]/form/fieldset[2]/p/input[2]";
     private static final String ABSOLUTE_PATH_FIND_CAR_BUTTON = "/html/body/div[1]/div/section[1]/form/footer/button";
 
+    private static final String CLASS_NAME_FEEDBACK_MESSAGE = "feedback--is_error";
+
 
     @FindBy(className = CLASS_NAME_CALENDAR)
     private WebElement datePickUpCalendar;
@@ -94,6 +96,9 @@ public class DateQuotePage extends AbstractPage {
 
     @FindBy(xpath = ABSOLUTE_PATH_FIND_CAR_BUTTON)
     private WebElement findCarButton;
+
+    @FindBy(className = CLASS_NAME_FEEDBACK_MESSAGE)
+    private WebElement feedbackMessage;
 
 
     public DateQuotePage(WebDriver webDriver) {
@@ -206,6 +211,10 @@ public class DateQuotePage extends AbstractPage {
         dropdownReturnMinute.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getMinuteReturn()))).forEach(WebElement::click);
 
         return this;
+    }
+
+    public String getErrorMessage() {
+        return feedbackMessage.getText();
     }
 
     public DateQuotePage inputDriverAge(User user) {
