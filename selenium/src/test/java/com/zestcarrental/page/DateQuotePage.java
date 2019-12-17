@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,31 +21,57 @@ public class DateQuotePage extends AbstractPage {
     private static final String CLASS_NAME_CALENDAR = "ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all";
 
     private static final String ABSOLUTE_PATH_PICKUP_CALENDAR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/h3[1]";
+
     private static final String ABSOLUTE_PATH_RETURN_CALENDAR= "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/h3[1]";
 
     private static final String CLASS_NAME_CURRENT_DAY = "ui-state-default ui-state-highlight ui-state-active";
-    private static final String CLASS_NAME_DAY = "ui-state-default";
-    private static final String CLASS_NAME_MONTH = "ui-datepicker-month";
-    private static final String CLASS_NAME_YEAR = "ui-datepicker-year";
 
-    private static final String ABSOLUTE_PATH_PICKUP_MINUTE = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[3]/div[2]/span[1]/span[1]/span/span[1]";
-    private static final String ABSOLUTE_PATH_PICKUP_HOUR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[3]/div[2]/span[3]/span[1]/span/span[1]";
-    private static final String ABSOLUTE_PATH_RETURN_MINUTE = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[3]/div[2]/span[1]/span[1]/span/span[1]";
-    private static final String ABSOLUTE_PATH_RETURN_HOUR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[3]/div[2]/span[3]/span[1]/span/span[1]";
+    private static final String CLASS_NAME_DAY = "ui-state-default";
+
+    private static final String ABSOLUTE_PATH_PICKUP_MONTH = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[2]/div[2]/div/div/div/span[1]";
+
+    private static final String ABSOLUTE_PATH_PICKUP_YEAR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[2]/div[2]/div/div/div/span[2]";
+
+    private static final String ABSOLUTE_PATH_RETURN_MONTH = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[2]/div[2]/div/div/div/span[1]";
+
+    private static final String ABSOLUTE_PATH_RETURN_YEAR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[2]/div[2]/div/div/div/span[2]";
+
+    private static final String ABSOLUTE_PATH_PICKUP_MINUTE = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[3]/div[2]/span[3]/span[1]/span/span[1]";
+
+    private static final String ABSOLUTE_PATH_PICKUP_HOUR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[3]/div[2]/span[1]/span[1]/span/span[1]";
+
+    private static final String ABSOLUTE_PATH_RETURN_MINUTE = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[3]/div[2]/span[3]/span[1]/span/span[1]";
+
+    private static final String ABSOLUTE_PATH_RETURN_HOUR = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[3]/div[2]/span[1]/span[1]/span/span[1]";
 
     private static final String ID_DROPDOWN_PICKUP_HOUR = "select2-pickup_time_hours-pa-results";
+
+    private static final String CLASS_NAME_PICKUP_HOUR = "select2-results__option";
+
+    private static final String CLASS_NAME_PICKUP_MINUTE = "select2-results__option";
+
+    private static final String CLASS_NAME_RETURN_HOUR = "select2-results__option";
+
+    private static final String CLASS_NAME_RETURN_MINUTE = "select2-results__option";
+
     private static final String ID_DROPDOWN_PICKUP_MINUTE = "select2-pickup_time_minutes-th-results";
+
     private static final String ID_DROPDOWN_RETURN_HOUR = "select2-pickup_time_hours-pa-results";
+
     private static final String ID_DROPDOWN_RETURN_MINUTE = "select2-pickup_time_minutes-th-results";
 
     private static final String ABSOLUTE_PATH_INPUT_DRIVER_AGE = "/html/body/div[1]/div/section[1]/form/fieldset[2]/p/input[2]";
+
     private static final String ABSOLUTE_PATH_FIND_CAR_BUTTON = "/html/body/div[1]/div/section[1]/form/footer/button";
 
     private static final String CLASS_NAME_FEEDBACK_MESSAGE = "feedback--is_error";
 
     private static final String ABSOLUTE_PATH_PICKUP_PREV = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[2]/div[2]/div/div/a[1]";
+
     private static final String ABSOLUTE_PATH_PICKUP_NEXT = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[1]/div[2]/div[2]/div/div/a[2]";
+
     private static final String ABSOLUTE_PATH_RETURN_PREV = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[2]/div[2]/div/div/a[1]";
+
     private static final String ABSOLUTE_PATH_RETURN_NEXT = "/html/body/div[1]/div/section[1]/form/fieldset[1]/div[2]/div[2]/div[2]/div/div/a[2]";
 
     @FindBy(className = CLASS_NAME_CALENDAR)
@@ -60,11 +88,17 @@ public class DateQuotePage extends AbstractPage {
 
     private List<WebElement> datesPickerDay = webDriver.findElements(By.xpath(CLASS_NAME_DAY));
 
-    @FindBy(className = CLASS_NAME_MONTH)
-    private WebElement datePickerMonth;
+    @FindBy(xpath = ABSOLUTE_PATH_PICKUP_MONTH)
+    private WebElement datePickupMonth;
 
-    @FindBy(className = CLASS_NAME_YEAR)
-    private WebElement datePickerYear;
+    @FindBy(xpath = ABSOLUTE_PATH_PICKUP_YEAR)
+    private WebElement datePickupYear;
+
+    @FindBy(xpath = ABSOLUTE_PATH_RETURN_MONTH)
+    private WebElement dateReturnMonth;
+
+    @FindBy(xpath = ABSOLUTE_PATH_RETURN_YEAR)
+    private WebElement dateReturnYear;
 
     @FindBy(xpath = ABSOLUTE_PATH_PICKUP_HOUR)
     private WebElement pickupHour;
@@ -77,14 +111,6 @@ public class DateQuotePage extends AbstractPage {
 
     @FindBy(xpath = ABSOLUTE_PATH_RETURN_MINUTE)
     private WebElement returnMinute;
-
-    private List<WebElement> dropdownPickupHour = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_HOUR));
-
-    private List<WebElement> dropdownPickupMinute = webDriver.findElements(By.id(ID_DROPDOWN_PICKUP_MINUTE));
-
-    private List<WebElement> dropdownReturnHour = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_HOUR));
-
-    private List<WebElement> dropdownReturnMinute = webDriver.findElements(By.id(ID_DROPDOWN_RETURN_MINUTE));
 
     @FindBy(xpath = ABSOLUTE_PATH_INPUT_DRIVER_AGE)
     private WebElement inputDriverAge;
@@ -114,41 +140,36 @@ public class DateQuotePage extends AbstractPage {
         return currentDatePickerDay.getText();
     }
 
-    public String getDatePickerMonth() {
-        return datePickerMonth.getText();
-    }
-
-    public String getDatePickerYear() {
-        return datePickerYear.getText();
-    }
-
     public DateQuotePage choosePickupDate(CarDestinationCriteria criteria) {
         logger.info("Choose pickup date");
 
-        String chosenMonth = this.getDatePickerMonth();
-        int chosenYear = Integer.parseInt(this.getDatePickerYear());
+        String chosenMonth = datePickupMonth.getText();
+        int chosenYear = Integer.parseInt(datePickupYear.getText());
 
         while (true) {
             if (Integer.parseInt(criteria.getYearPickup()) < chosenYear) {
                 pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_PREV)).click();
-                chosenYear = Integer.parseInt(this.getDatePickerYear());
+                chosenYear = Integer.parseInt(datePickupYear.getText());
             } else if (Integer.parseInt(criteria.getYearPickup()) > chosenYear) {
                 pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_NEXT)).click();
-                chosenYear = Integer.parseInt(this.getDatePickerYear());
+                chosenYear = Integer.parseInt(datePickupYear.getText());
             } else {
                 if (findIndex(MONTHS, criteria.getMonthPickup()) < findIndex(MONTHS, chosenMonth)) {
                     pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_PREV)).click();
-                    chosenMonth = this.getDatePickerMonth();
+                    chosenMonth = datePickupMonth.getText();
                 } else if (findIndex(MONTHS, criteria.getMonthPickup()) > findIndex(MONTHS, chosenMonth)) {
                     pickupCalendar.findElement(By.xpath(ABSOLUTE_PATH_PICKUP_NEXT)).click();
-                    chosenMonth = this.getDatePickerMonth();
+                    chosenMonth = this.datePickupMonth.getText();
                 } else {
                     break;
                 }
             }
         }
 
-        pickupCalendar.findElements(By.xpath(CLASS_NAME_DAY)).stream()
+        System.out.println("-----num elem------");
+        System.out.println(pickupCalendar.findElements(By.className(CLASS_NAME_DAY)));
+
+        pickupCalendar.findElements(By.className(CLASS_NAME_DAY)).stream()
                 .filter(e -> e.getText().equals(String.valueOf(criteria.getDayPickup())))
                 .forEach(WebElement::click);
 
@@ -158,28 +179,31 @@ public class DateQuotePage extends AbstractPage {
     public DateQuotePage chooseReturnDate(CarDestinationCriteria criteria) {
         logger.info("Choose return date");
 
-        String chosenMonth = this.getDatePickerMonth();
-        int chosenYear = Integer.parseInt(this.getDatePickerYear());
+        String chosenMonth = dateReturnMonth.getText();
+        int chosenYear = Integer.parseInt(dateReturnYear.getText());
 
         while (true) {
             if (Integer.parseInt(criteria.getYearReturn()) < chosenYear) {
                 returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_PREV)).click();
-                chosenYear = Integer.parseInt(this.getDatePickerYear());
+                chosenYear = Integer.parseInt(dateReturnYear.getText());
             } else if (Integer.parseInt(criteria.getYearReturn()) > chosenYear) {
                 returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_NEXT)).click();
-                chosenYear = Integer.parseInt(this.getDatePickerYear());
+                chosenYear = Integer.parseInt(dateReturnYear.getText());
             } else {
                 if (findIndex(MONTHS, criteria.getMonthReturn()) < findIndex(MONTHS, chosenMonth)) {
                     returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_PREV)).click();
-                    chosenMonth = this.getDatePickerMonth();
+                    chosenMonth = dateReturnMonth.getText();
                 } else if (findIndex(MONTHS, criteria.getMonthReturn()) > findIndex(MONTHS, chosenMonth)) {
                     returnCalendar.findElement(By.xpath(ABSOLUTE_PATH_RETURN_NEXT)).click();
-                    chosenMonth = this.getDatePickerMonth();
+                    chosenMonth = dateReturnMonth.getText();
                 } else {
                     break;
                 }
             }
         }
+
+        System.out.println("-----num elem------");
+        System.out.println(returnCalendar.findElements(By.className(CLASS_NAME_DAY)));
 
         returnCalendar.findElements(By.className(CLASS_NAME_DAY)).stream()
                 .filter(e -> e.getText().equals(criteria.getDayReturn()))
@@ -193,11 +217,30 @@ public class DateQuotePage extends AbstractPage {
 
         pickupHour.click();
 
-        dropdownPickupHour.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getHourPickup()))).forEach(WebElement::click);
+        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_PICKUP_HOUR)));
+
+        List<WebElement> dropdownPickupHour = webDriver.findElements(By.className(CLASS_NAME_PICKUP_HOUR));
+
+        for (WebElement element : dropdownPickupHour) {
+            if (element.getText().equals(criteria.getHourPickup())) {
+                element.click();
+                break;
+            }
+        }
 
         pickupMinute.click();
 
-        dropdownPickupMinute.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getMinutePickup()))).forEach(WebElement::click);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_PICKUP_MINUTE)));
+
+        List<WebElement> dropdownPickupMinute = webDriver.findElements(By.className(CLASS_NAME_PICKUP_MINUTE));
+
+        for (WebElement element : dropdownPickupMinute) {
+            if (element.getText().equals(criteria.getMinutePickup())) {
+                element.click();
+                break;
+            }
+        }
 
         return this;
     }
@@ -207,16 +250,39 @@ public class DateQuotePage extends AbstractPage {
 
         returnHour.click();
 
-        dropdownReturnHour.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getHourReturn()))).forEach(WebElement::click);
+        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_RETURN_HOUR)));
+
+        List<WebElement> dropdownReturnHour = webDriver.findElements(By.className(CLASS_NAME_RETURN_HOUR));
+
+        for (WebElement element : dropdownReturnHour) {
+            if (element.getText().equals(criteria.getHourReturn())) {
+                element.click();
+                break;
+            }
+        }
 
         returnMinute.click();
 
-        dropdownReturnMinute.stream().filter(e -> e.getText().equals(String.valueOf(criteria.getMinuteReturn()))).forEach(WebElement::click);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_RETURN_MINUTE)));
+
+        List<WebElement> dropdownReturnMinute = webDriver.findElements(By.className(CLASS_NAME_RETURN_MINUTE));
+
+        for (WebElement element : dropdownReturnMinute) {
+            if (element.getText().equals(criteria.getMinuteReturn())) {
+                element.click();
+                break;
+            }
+        }
 
         return this;
     }
 
     public String getErrorMessage() {
+
+        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_FEEDBACK_MESSAGE)));
+
         return feedbackMessage.getText();
     }
 

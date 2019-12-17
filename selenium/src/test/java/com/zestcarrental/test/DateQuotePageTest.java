@@ -28,9 +28,10 @@ public class DateQuotePageTest extends CommonConditions {
                 .chooseReturnDate(criteria)
                 .chooseReturnTime(criteria)
                 .inputDriverAge(user)
+                .findCar()
                 .getErrorMessage();
 
-        Assert.assertEquals(errorMessage, ERROR_MESSAGE_TIME);
+        Assert.assertEquals(errorMessage, ERROR_MESSAGE_BOOK_DATE_ORDER);
     }
 
     //@Test
