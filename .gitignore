@@ -14,3 +14,4 @@
 /clean-code/.idea
 /clean-code/target
 /selenium/selemium.iml
+/selenium/*.sh
