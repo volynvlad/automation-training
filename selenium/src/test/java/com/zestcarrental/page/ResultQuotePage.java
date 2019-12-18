@@ -1,12 +1,11 @@
 package com.zestcarrental.page;
 
+import com.zestcarrental.service.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,15 +58,17 @@ public class ResultQuotePage extends AbstractPage {
     public ResultQuotePage chooseCurrency(String currency) {
         logger.info("Choose currency");
 
-        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
-
         if (currency.equals(CURRENCY_EUR)) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(ID_CURRENCY_BUTTON_EUR)));
+            Helper.waitUntil(webDriver, WAIT_TIMEOUT_SECONDS, By.id(ID_CURRENCY_BUTTON_EUR));
+
             currencyEurButton = webDriver.findElement(By.id(ID_CURRENCY_BUTTON_EUR));
+
             currencyEurButton.click();
         } else if (currency.equals(CURRENCY_GBP)) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(ID_CURRENCY_BUTTON_GBP)));
+            Helper.waitUntil(webDriver, WAIT_TIMEOUT_SECONDS, By.id(ID_CURRENCY_BUTTON_GBP));
+
             currencyGbpButton = webDriver.findElement(By.id(ID_CURRENCY_BUTTON_GBP));
+
             currencyGbpButton.click();
         }
 

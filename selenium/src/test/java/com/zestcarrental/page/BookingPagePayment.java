@@ -1,6 +1,7 @@
 package com.zestcarrental.page;
 
 import com.zestcarrental.model.User;
+import com.zestcarrental.service.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -63,20 +64,15 @@ public class BookingPagePayment extends AbstractPage {
     public BookingPagePayment fillForm(User user) {
         logger.info("Fill payment details form");
 
-        cardNumberInput.click();
-        cardNumberInput.sendKeys(user.getCardNumber());
+        Helper.clickAndSend(cardNumberInput, user.getCardNumber());
 
-        expMonthInput.click();
-        expMonthInput.sendKeys(user.getExpireMonthDate());
+        Helper.clickAndSend(expMonthInput, user.getExpireMonthDate());
 
-        expYearInput.click();
-        expYearInput.sendKeys(user.getExpireYearDate());
+        Helper.clickAndSend(expYearInput, user.getExpireYearDate());
 
-        nameOnCardInput.click();
-        nameOnCardInput.sendKeys(user.getNameOnCard());
+        Helper.clickAndSend(nameOnCardInput, user.getNameOnCard());
 
-        securityCodeInput.click();
-        securityCodeInput.sendKeys(String.valueOf(user.getSecurityCode()));
+        Helper.clickAndSend(securityCodeInput, String.valueOf(user.getSecurityCode()));
 
         return this;
     }

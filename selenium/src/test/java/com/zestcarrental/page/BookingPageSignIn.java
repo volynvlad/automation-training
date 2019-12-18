@@ -1,6 +1,7 @@
 package com.zestcarrental.page;
 
 import com.zestcarrental.model.User;
+import com.zestcarrental.service.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,16 +59,13 @@ public class BookingPageSignIn extends AbstractPage {
         if (isNew) {
             newTypeCustomerLabel.click();
 
-            customerMailInput.click();
-            customerMailInput.sendKeys(user.getEmail());
+            Helper.clickAndSend(customerMailInput, user.getEmail());
         } else {
             repeatTypeCustomerLabel.click();
 
-            customerMailInput.click();
-            customerMailInput.sendKeys(user.getEmail());
+            Helper.clickAndSend(customerMailInput, user.getEmail());
 
-            customerPasswordInput.click();
-            customerPasswordInput.sendKeys(user.getPassword());
+            Helper.clickAndSend(customerPasswordInput, user.getPassword());
         }
 
         return this;

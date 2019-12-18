@@ -1,6 +1,7 @@
 package com.zestcarrental.page;
 
 import com.zestcarrental.model.User;
+import com.zestcarrental.service.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -65,17 +66,13 @@ public class BookingPageTravelDetails extends AbstractPage {
     public BookingPageTravelDetails fillForm(User user) {
         logger.info("Fill main driver details form");
 
-        firstNameInput.click();
-        firstNameInput.sendKeys(user.getFirstName());
+        Helper.clickAndSend(firstNameInput, user.getFirstName());
 
-        lastNameInput.click();
-        lastNameInput.sendKeys(user.getLastName());
+        Helper.clickAndSend(lastNameInput, user.getLastName());
 
-        ageInput.click();
-        ageInput.sendKeys(String.valueOf(user.getAge()));
+        Helper.clickAndSend(ageInput, String.valueOf(user.getAge()));
 
-        mobileNumberInput.click();
-        mobileNumberInput.sendKeys(user.getMobileNumber());
+        Helper.clickAndSend(mobileNumberInput, user.getMobileNumber());
 
         return this;
     }

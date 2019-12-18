@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static com.zestcarrental.util.StringUtils.ERROR_MESSAGE_VALID_CARD;
 
 public class CompleteTest extends CommonConditions {
-    //@Test
+    @Test
     public void completeTest() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();

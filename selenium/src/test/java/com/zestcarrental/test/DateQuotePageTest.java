@@ -28,13 +28,13 @@ public class DateQuotePageTest extends CommonConditions {
                 .chooseReturnDate(criteria)
                 .chooseReturnTime(criteria)
                 .inputDriverAge(user)
-                .findCar()
+                .findCarWithError()
                 .getErrorMessage();
 
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_BOOK_DATE_ORDER);
     }
 
-    //@Test
+    @Test
     public void bookingPickupBeforeReturn() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -49,12 +49,13 @@ public class DateQuotePageTest extends CommonConditions {
                 .chooseReturnDate(criteria)
                 .chooseReturnTime(criteria)
                 .inputDriverAge(user)
+                .findCarWithError()
                 .getErrorMessage();
 
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_TIME);
     }
 
-    //@Test
+    @Test
     public void bookingPickupTooLate() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -69,12 +70,13 @@ public class DateQuotePageTest extends CommonConditions {
                 .chooseReturnDate(criteria)
                 .chooseReturnTime(criteria)
                 .inputDriverAge(user)
+                .findCarWithError()
                 .getErrorMessage();
 
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_BOOK_DATE_ORDER);
     }
 
-    //@Test
+    @Test
     public void bookingPickupAndReturnTooLong() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -89,12 +91,13 @@ public class DateQuotePageTest extends CommonConditions {
                 .chooseReturnDate(criteria)
                 .chooseReturnTime(criteria)
                 .inputDriverAge(user)
+                .findCarWithError()
                 .getErrorMessage();
 
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_BOOK_TOO_LONG);
     }
 
-    //@Test
+    @Test
     public void driverAgeTooSmall() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();
@@ -109,6 +112,7 @@ public class DateQuotePageTest extends CommonConditions {
                 .chooseReturnDate(criteria)
                 .chooseReturnTime(criteria)
                 .inputDriverAge(user)
+                .findCarWithError()
                 .getErrorMessage();
 
         Assert.assertEquals(errorMessage, ERROR_MESSAGE_TOO_SMALL_DRIVER_AGE);

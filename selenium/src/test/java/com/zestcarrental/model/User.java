@@ -7,23 +7,41 @@ import java.util.Objects;
 public class User {
 
     private String username;
+
     private String password;
+
     private TitleType titleType;
+
     private String firstName;
+
     private String lastName;
+
     private String age;
+
     private String mobileNumber;
+
     private String email;
+
     private String country;
+
     private String city;
+
     private String postCode;
+
     private String cardNumber;
+
     private String nameOnCard;
+
     private String securityCode;
+
     private String addressLineFirst;
+
     private String addressLineSecond;
+
     private String telephoneNumber;
+
     private String expireMonthDate;
+
     private String expireYearDate;
 
     public User(String username, String password, TitleType titleType, String firstName, String lastName,

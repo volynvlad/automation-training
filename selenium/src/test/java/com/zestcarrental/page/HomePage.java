@@ -1,17 +1,14 @@
 package com.zestcarrental.page;
 
 import com.zestcarrental.model.CarDestinationCriteria;
+import com.zestcarrental.service.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static com.zestcarrental.util.StringUtils.HOMEPAGE_URL;
 
@@ -63,9 +60,7 @@ public class HomePage extends AbstractPage {
     public HomePage pressReturnLabel() {
         logger.info("Press return label");
 
-
-        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CSS_SELECTOR_RETURN_LABEL)));
+        Helper.waitUntil(webDriver, WAIT_TIMEOUT_SECONDS, By.cssSelector(CSS_SELECTOR_RETURN_LABEL));
 
         returnLabel = webDriver.findElement(By.cssSelector(CSS_SELECTOR_RETURN_LABEL));
 
@@ -77,12 +72,9 @@ public class HomePage extends AbstractPage {
     public HomePage writePickupLocation(CarDestinationCriteria criteria) {
         logger.info("Write pickup location");
 
-        searchPickup.click();
-        searchPickup.sendKeys(criteria.getLocationPickup());
-        searchPickup.click();
+        Helper.clickAndSend(searchPickup, criteria.getLocationPickup());
 
-        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_FIELD_SUGGESTIONS)));
+        Helper.waitUntil(webDriver, WAIT_TIMEOUT_SECONDS, By.className(CLASS_NAME_FIELD_SUGGESTIONS));
 
         pickupElements = webDriver.findElements(By.className(CLASS_NAME_FIELD_SUGGESTIONS));
 
@@ -92,13 +84,7 @@ public class HomePage extends AbstractPage {
     public boolean isNoLocation() {
         logger.info("Is no location");
 
-        for (WebElement element : pickupElements) {
-            if(element.getAttribute(ATTRIBUTE_DATA_NAME).equals(ATTRIBUTE_DATA_NAME_FAIL_SEARCH)) {
-                return true;
-            }
-        }
-
-        return false;
+        return pickupElements.stream().anyMatch(e -> e.getAttribute(ATTRIBUTE_DATA_NAME).equals(ATTRIBUTE_DATA_NAME_FAIL_SEARCH));
     }
 
     public HomePage choosePickupLocationFromDropdown(CarDestinationCriteria criteria) {
@@ -112,8 +98,7 @@ public class HomePage extends AbstractPage {
     public HomePage chooseReturnLocationFromDropdown(CarDestinationCriteria criteria) {
         logger.info("Choose return location");
 
-        WebDriverWait wait = new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CLASS_NAME_FIELD_SUGGESTIONS)));
+        Helper.waitUntil(webDriver, WAIT_TIMEOUT_SECONDS, By.className(CLASS_NAME_FIELD_SUGGESTIONS));
 
         returnElements = webDriver.findElements(By.className(CLASS_NAME_FIELD_SUGGESTIONS));
 

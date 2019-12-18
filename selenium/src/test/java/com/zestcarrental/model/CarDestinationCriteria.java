@@ -7,19 +7,25 @@ public class CarDestinationCriteria {
     private String locationPickup;
 
     private String dayPickup;
+
     private String monthPickup;
+
     private String yearPickup;
 
     private String hourPickup;
+
     private String minutePickup;
 
     private String locationReturn;
 
     private String dayReturn;
+
     private String monthReturn;
+
     private String yearReturn;
 
     private String hourReturn;
+
     private String minuteReturn;
 
     private String numberOfDrivers;

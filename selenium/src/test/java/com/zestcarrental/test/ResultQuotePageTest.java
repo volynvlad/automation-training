@@ -13,7 +13,7 @@ import static com.zestcarrental.util.StringUtils.*;
 
 public class ResultQuotePageTest extends CommonConditions {
 
-    //@Test
+    @Test
     public void changeCurrency() {
         CarDestinationCriteria criteria = CarDestinationCriteriaCreator.withCredentialsFromProperty();
         User user = UserCreator.withCredentialsFromProperty();

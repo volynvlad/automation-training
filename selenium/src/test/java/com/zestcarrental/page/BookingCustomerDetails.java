@@ -1,6 +1,7 @@
 package com.zestcarrental.page;
 
 import com.zestcarrental.model.User;
+import com.zestcarrental.service.Helper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -112,38 +113,29 @@ public class BookingCustomerDetails extends AbstractPage {
         titleSpan.click();
         titleSpan.findElement(By.cssSelector("span[title='" + user.getTitleType() +  " ']")).click();
 
-        firstNameInput.click();
-        firstNameInput.sendKeys(user.getFirstName());
+        Helper.clickAndSend(firstNameInput, user.getFirstName());
 
-        lastNameInput.click();
-        lastNameInput.sendKeys(user.getLastName());
 
-        addressLineFirstInput.click();
-        addressLineFirstInput.sendKeys(user.getAddressLineFirst());
+        Helper.clickAndSend(lastNameInput, user.getLastName());
 
-        addressLineSecondInput.click();
-        addressLineSecondInput.sendKeys(user.getAddressLineSecond());
+        Helper.clickAndSend(addressLineFirstInput, user.getAddressLineFirst());
 
-        cityInput.click();
-        cityInput.sendKeys(user.getCity());
+        Helper.clickAndSend(addressLineSecondInput, user.getAddressLineSecond());
 
-        countryInput.click();
-        countryInput.sendKeys(user.getCountry());
+        Helper.clickAndSend(cityInput, user.getCity());
+
+        Helper.clickAndSend(countryInput, user.getCountry());
 
         countrySpan.click();
         countriesLi.stream().filter(e -> e.getText().equals(String.valueOf(user.getCountry()))).forEach(WebElement::click);
 
-        landLineInput.click();
-        landLineInput.sendKeys(user.getTelephoneNumber());
+        Helper.clickAndSend(landLineInput, user.getTelephoneNumber());
 
-        mobileInput.click();
-        mobileInput.sendKeys(user.getMobileNumber());
+        Helper.clickAndSend(mobileInput, user.getMobileNumber());
 
-        customerEmailInput.click();
-        customerEmailInput.sendKeys(user.getEmail());
+        Helper.clickAndSend(customerEmailInput, user.getEmail());
 
-        customerRetypeEmailInput.click();
-        customerRetypeEmailInput.sendKeys(user.getEmail());
+        Helper.clickAndSend(customerRetypeEmailInput, user.getEmail());
 
         noNewsletterSpan.click();
 

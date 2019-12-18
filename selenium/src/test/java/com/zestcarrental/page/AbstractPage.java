@@ -11,6 +11,7 @@ public abstract class AbstractPage {
     protected final int WAIT_TIMEOUT_SECONDS = 15;
 
     protected final Logger logger = LogManager.getRootLogger();
+
     protected abstract AbstractPage openPage();
 
     protected AbstractPage(WebDriver webDriver) {
