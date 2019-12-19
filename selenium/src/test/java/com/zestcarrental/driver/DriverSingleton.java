@@ -31,10 +31,10 @@ public class DriverSingleton {
                 default: {
                     ChromeOptions options = new ChromeOptions();
 
-                    options.addArguments("--disable-extensions");
                     options.addArguments("--headless");
                     options.addArguments("--disable-gpu");
                     options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-dev-shm-usage");
                     options.addArguments("--window-size=1920,1080");
 
                     WebDriverManager.chromedriver().setup();
